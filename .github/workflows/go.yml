@@ -48,6 +48,5 @@ jobs:
           go-version: ${{ matrix.go }}
       - name: Examples
         run: |
-          cd examples
           go build ./...
           go test ./...
