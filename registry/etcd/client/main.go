@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/examples/helloworld/helloworld"
+	"github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	clientv3 "go.etcd.io/etcd/client/v3"
@@ -44,13 +44,13 @@ func main() {
 	defer connHTTP.Close()
 
 	for {
-		callHTTP(r, connHTTP)
-		callGRPC(r, connGRPC)
+		callHTTP(connHTTP)
+		callGRPC(connGRPC)
 		time.Sleep(time.Second)
 	}
 }
 
-func callGRPC(r *etcd.Registry, conn *srcgrpc.ClientConn) {
+func callGRPC(conn *srcgrpc.ClientConn) {
 	client := helloworld.NewGreeterClient(conn)
 	reply, err := client.SayHello(context.Background(), &helloworld.HelloRequest{Name: "kratos"})
 	if err != nil {
@@ -59,7 +59,7 @@ func callGRPC(r *etcd.Registry, conn *srcgrpc.ClientConn) {
 	log.Printf("[grpc] SayHello %+v\n", reply)
 }
 
-func callHTTP(r *etcd.Registry, conn *http.Client) {
+func callHTTP(conn *http.Client) {
 	client := helloworld.NewGreeterHTTPClient(conn)
 	reply, err := client.SayHello(context.Background(), &helloworld.HelloRequest{Name: "kratos"})
 	if err != nil {
