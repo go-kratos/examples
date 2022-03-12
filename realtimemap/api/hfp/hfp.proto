@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package hfp;
+
+option go_package = "api/hfp;hfp";
+
+enum DoorState {
+  DoorState_Closed = 0;
+  DoorState_Open = 1;
+}
+
+message Payload {
+  optional double long = 1; // Longitude 经度(WGS84)
+  optional double  lat = 2; // Latitude 纬度(WGS84)
+  optional int32 hdg = 3;  // Heading 朝向角度[0, 360]
+  optional int32 drst = 4; // Door State 门状态 0:所有门都已关闭 1:有门打开
+  optional string  tst = 5; // Timestamp 时间戳
+  optional double spd = 6; // Speed 车速(m/s)
+  optional int32 odo = 7;  // Odometer 里程(m)
+}
+
+message Event {
+  string VehicleId = 1; // 车辆ID
+  string OperatorId = 2; // 司机ID
+
+  optional Payload VP = 3; // Vehicle Position 坐标
+  optional Payload DOO = 4; // Door Open 开门
+  optional Payload DOC = 5;// Door Closed 关门
+}

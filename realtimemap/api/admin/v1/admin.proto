@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package admin.v1;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "api/admin/v1;v1";
+
+
+service Admin {
+  //
+  rpc GetOrganizations (google.protobuf.Empty) returns (GetOrganizationsReply) {
+    option (google.api.http) = {
+      get: "/api/organization"
+    };
+  }
+
+  //
+  rpc GetGeofences (GetGeofencesReq) returns (GetGetGeofencesReply) {
+    option (google.api.http) = {
+      get: "/api/organization/{org_id}"
+    };
+  }
+
+  //
+  rpc GetPositionsHistory (GetPositionsHistoryReq) returns (GetPositionsHistoryReply) {
+    option (google.api.http) = {
+      get: "/api/trail/{id}"
+    };
+  }
+}
+
+message WebsocketProto  {
+  string event_id = 1;
+  string payload = 2;
+}
+
+message Position  {
+  string vehicle_id = 1;
+  string org_id = 2;
+  int64 timestamp = 3;
+  double longitude = 4;
+  double latitude = 5;
+  int32 heading = 6;
+  bool doors_open = 7;
+  double speed = 8;
+}
+
+message PositionBatch {
+  repeated Position positions = 1;
+}
+
+message GeoPoint {
+  double longitude = 1;
+  double latitude = 2;
+}
+
+message Notification {
+  string message = 1;
+}
+
+message Viewport {
+  GeoPoint south_west = 1;
+  GeoPoint north_east = 2;
+}
+
+message UpdateViewport {
+  Viewport viewport = 1;
+}
+
+message Organization {
+  string id = 1;
+  string name = 2;
+}
+
+message Geofence  {
+  string name = 1;
+  double radius_in_meters = 2;
+  double longitude = 3;
+  double latitude = 4;
+  string org_id = 5;
+  repeated string vehicles_in_zone = 6;
+}
+
+message GetOrganizationsReq {
+
+}
+
+message GetOrganizationsReply {
+  repeated Organization Organizations = 1;
+}
+
+message GetPositionsHistoryReq {
+  string id = 1;
+}
+
+message GetPositionsHistoryReply {
+  repeated Position Positions = 1;
+}
+
+message GetGeofencesReq {
+  string org_id = 1;
+}
+
+message GetGetGeofencesReply  {
+  string Id = 1;
+  string Name = 2;
+  repeated Geofence Geofences = 3;
+}

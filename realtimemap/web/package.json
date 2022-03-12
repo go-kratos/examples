@@ -1,0 +1,41 @@
+{
+  "name": "Kratos.Map",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@turf/circle": "^6.5.0",
+    "axios": "^0.21.1",
+    "core-js": "^3.6.5",
+    "google-maps": "^4.3.3",
+    "lodash": "^4.17.20",
+    "mapbox-gl": "^1.12.0",
+    "primeflex": "^3.0.1",
+    "primeicons": "^4.1.0",
+    "primevue": "^3.7.0",
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "@types/lodash": "^4.14.163",
+    "@types/mapbox-gl": "^1.12.5",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^5.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^7.0.0-0",
+    "typescript": "~3.9.3"
+  }
+}
