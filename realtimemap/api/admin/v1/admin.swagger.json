@@ -1,0 +1,244 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "admin.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Admin"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/organization": {
+      "get": {
+        "operationId": "Admin_GetOrganizations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetOrganizationsReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/organization/{org_id}": {
+      "get": {
+        "operationId": "Admin_GetGeofences",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetGetGeofencesReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "org_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    },
+    "/api/trail/{id}": {
+      "get": {
+        "operationId": "Admin_GetPositionsHistory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetPositionsHistoryReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Admin"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1Geofence": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "radius_in_meters": {
+          "type": "number",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "vehicles_in_zone": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "v1GetGetGeofencesReply": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Geofences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Geofence"
+          }
+        }
+      }
+    },
+    "v1GetOrganizationsReply": {
+      "type": "object",
+      "properties": {
+        "Organizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Organization"
+          }
+        }
+      }
+    },
+    "v1GetPositionsHistoryReply": {
+      "type": "object",
+      "properties": {
+        "Positions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v1Position"
+          }
+        }
+      }
+    },
+    "v1Organization": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Position": {
+      "type": "object",
+      "properties": {
+        "vehicle_id": {
+          "type": "string"
+        },
+        "org_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "int64"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double"
+        },
+        "heading": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "doors_open": {
+          "type": "boolean"
+        },
+        "speed": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    }
+  }
+}
