@@ -25,7 +25,7 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 }
 
 func main() {
-	r, err := eureka.New([]string{"http://eureka1.base.test.bj1:18761"}, eureka.WithHeartbeat(time.Second), eureka.WithRefresh(time.Second), eureka.WithEurekaPath("eureka"))
+	r, err := eureka.New([]string{"http://127.0.0.1:18761"}, eureka.WithHeartbeat(time.Second), eureka.WithRefresh(time.Second), eureka.WithEurekaPath("eureka"))
 
 	if err != nil {
 		log.Fatal(err)
