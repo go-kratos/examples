@@ -1,0 +1,3 @@
+p, moderator, /admin.v1.AdminService/GetModeratorBoard, *
+p, api_admin, /admin.v1.AdminService/*, *
+g, admin, api_admin
