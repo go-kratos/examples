@@ -13,6 +13,7 @@ require (
 	github.com/go-kratos/kratos/contrib/registry/consul/v2 v2.0.0-20220309025117-4387085047b9
 	github.com/go-kratos/kratos/contrib/registry/discovery/v2 v2.0.0-20220309025117-4387085047b9
 	github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20220309025117-4387085047b9
+	github.com/go-kratos/kratos/contrib/registry/eureka/v2 v2.0.0-20220330020930-99a0646acb98
 	github.com/go-kratos/kratos/contrib/registry/nacos/v2 v2.0.0-20220309025117-4387085047b9
 	github.com/go-kratos/kratos/contrib/registry/zookeeper/v2 v2.0.0-20220309025117-4387085047b9
 	github.com/go-kratos/kratos/v2 v2.2.0

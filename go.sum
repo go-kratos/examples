@@ -214,12 +214,15 @@ github.com/go-kratos/kratos/contrib/registry/discovery/v2 v2.0.0-20220309025117-
 github.com/go-kratos/kratos/contrib/registry/discovery/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:UY5VtXPCTZRUIaXojiCohlHIW3UMKDemMzFGVo0XvOc=
 github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20220309025117-4387085047b9 h1:bq7on3LM1caaFuMQMFs4nyLd5cRI3w3+ek5hJLmh7QA=
 github.com/go-kratos/kratos/contrib/registry/etcd/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:wHDbj1lp8hvAg7Eq7iNFM4vh5Fl8kWIiH4E1YY+fixs=
+github.com/go-kratos/kratos/contrib/registry/eureka/v2 v2.0.0-20220330020930-99a0646acb98 h1:G+V22bszWItm1W0a1fmWtIfPMu5LaMZGOkplerAl1MI=
+github.com/go-kratos/kratos/contrib/registry/eureka/v2 v2.0.0-20220330020930-99a0646acb98/go.mod h1:zhOx6W0I+V5iy+5JV2iNcINxz165lt1vXC1QR3ZY7h8=
 github.com/go-kratos/kratos/contrib/registry/nacos/v2 v2.0.0-20220309025117-4387085047b9 h1:ZTCEGUZ4Gxc1a1B7yjatUIzebJhXDUdIrmnGiQ2fFdo=
 github.com/go-kratos/kratos/contrib/registry/nacos/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:6u+dW8JHF/WTFbybR6RtnMuazvB2HuG1r1w0x8RVEeE=
 github.com/go-kratos/kratos/contrib/registry/zookeeper/v2 v2.0.0-20220309025117-4387085047b9 h1:MEUKgeu/e7MT1wT2qCFC1X7zhMPWBqiR61clbsOctVI=
 github.com/go-kratos/kratos/contrib/registry/zookeeper/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:07U6vMOW6Z6CErQeWhaEdFgJGKprXziTpDc17/FIvck=
 github.com/go-kratos/kratos/v2 v2.0.0/go.mod h1:USzTcAP7LS1rHVITQ/x/5JvlkUpG17pnfbqYV4j7SWc=
 github.com/go-kratos/kratos/v2 v2.0.3/go.mod h1:Hgl0YPry9YyLtwTTfwLfowPKg+YS0dgZ06O5NHqz5hE=
+github.com/go-kratos/kratos/v2 v2.1.5/go.mod h1:zMonCKAf8+He4b9NQ/QHr20tMznd4NO5XrNds36w/5k=
 github.com/go-kratos/kratos/v2 v2.2.0 h1:swSCoOdXD5F/L4eUfhapxSXe1I846hZz1wMLLixz9SA=
 github.com/go-kratos/kratos/v2 v2.2.0/go.mod h1:yebXu5KMayLjXZzMTY5HWIPRDwcBehHpiNF/Ot8A2pA=
 github.com/go-kratos/swagger-api v1.0.0 h1:R1JcAqLSvfDzqHoDnpK3Jt1MEJAXGNifV7AnBEhP3PE=
@@ -272,6 +275,7 @@ github.com/gogo/protobuf v1.3.2/go.mod h1:P1XiOD3dCwIKUDQYPy72D8LYyHL2YPYrpS2s69
 github.com/goji/httpauth v0.0.0-20160601135302-2da839ab0f4d/go.mod h1:nnjvkQ9ptGaCkuDUx6wNykzzlUixGxvkme+H/lnzb+A=
 github.com/golang-jwt/jwt v3.2.2+incompatible h1:IfV12K8xAKAnZqdXVzCZ+TOjboZ2keLg81eXfW3O+oY=
 github.com/golang-jwt/jwt v3.2.2+incompatible/go.mod h1:8pz2t5EyA70fFQQSrl6XZXzqecmYZeUEB8OUGHkxJ+I=
+github.com/golang-jwt/jwt/v4 v4.0.0/go.mod h1:/xlHOz8bRuivTWchD4jCa+NbatV+wEUSzwAxVc6locg=
 github.com/golang-jwt/jwt/v4 v4.2.0 h1:besgBTC8w8HjP6NzQdxwKH9Z5oQMZ24ThTrHp3cZ8eU=
 github.com/golang-jwt/jwt/v4 v4.2.0/go.mod h1:/xlHOz8bRuivTWchD4jCa+NbatV+wEUSzwAxVc6locg=
 github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
@@ -1243,6 +1247,7 @@ google.golang.org/genproto v0.0.0-20211028162531-8db9c33dc351/go.mod h1:5CzLGKJ6
 google.golang.org/genproto v0.0.0-20211118181313-81c1377c94b1/go.mod h1:5CzLGKJ67TSI2B9POpiiyGha0AjJvZIUgRMt1dSmuhc=
 google.golang.org/genproto v0.0.0-20211206160659-862468c7d6e0/go.mod h1:5CzLGKJ67TSI2B9POpiiyGha0AjJvZIUgRMt1dSmuhc=
 google.golang.org/genproto v0.0.0-20211208223120-3a66f561d7aa/go.mod h1:5CzLGKJ67TSI2B9POpiiyGha0AjJvZIUgRMt1dSmuhc=
+google.golang.org/genproto v0.0.0-20211223182754-3ac035c7e7cb/go.mod h1:5CzLGKJ67TSI2B9POpiiyGha0AjJvZIUgRMt1dSmuhc=
 google.golang.org/genproto v0.0.0-20220126215142-9970aeb2e350 h1:YxHp5zqIcAShDEvRr5/0rVESVS+njYF68PSdazrNLJo=
 google.golang.org/genproto v0.0.0-20220126215142-9970aeb2e350/go.mod h1:5CzLGKJ67TSI2B9POpiiyGha0AjJvZIUgRMt1dSmuhc=
 google.golang.org/grpc v1.17.0/go.mod h1:6QZJwpn2B+Zp71q/5VxRsJ6NXXVCE5NRUHRo+f3cWCs=
