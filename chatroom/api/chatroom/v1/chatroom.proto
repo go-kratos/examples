@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package chatroom.v1;
+
+option go_package = "api/chatroom/v1;v1";
+
+service ChatRoom {
+}
+
+message WebsocketProto  {
+  string event_id = 1;
+  string payload = 2;
+}
+
+message ChatMessage {
+  string message = 1;
+  string sender = 2;
+  string timestamp = 3;
+}
