@@ -1,0 +1,57 @@
+html {
+  font-size: 62.5%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 70vh;
+}
+.msg {
+  color: blueviolet;
+  font-size: 2rem;
+}
+.msgCtn {
+  margin: 1rem 0;
+  color: white;
+  padding: 1rem 1rem;
+  background-color: blueviolet;
+  border-radius: 6px;
+  font-size: 2rem;
+}
+.msgForm {
+  display: flex;
+  flex-direction: row;
+}
+.input {
+  height: 100%;
+  flex: 4;
+  margin-right: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 2px 1rem;
+  font-size: 1.5rem;
+  background-color: aliceblue;
+}
+.input:focus {
+  background-color: white;
+}
+.btn {
+  height: 5rem;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: blueviolet;
+  color: whitesmoke;
+  border: none;
+  font-size: 1.6rem;
+}
