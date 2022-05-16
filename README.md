@@ -1,5 +1,7 @@
 # examples
 
+English | [简体中文](README-CN.md)
+
 - blog is simple crud project.
 - config is kratos config example.
 - errors is kratos errors example, it is generated through proto-gen-go-errors.
