@@ -42,6 +42,7 @@ func main() {
 	s := &server{}
 	helloworld.RegisterGreeterServer(grpcSrv, s)
 	helloworld.RegisterGreeterHTTPServer(httpSrv, s)
+
 	app := kratos.New(
 		kratos.Name(Name),
 		kratos.Server(
@@ -49,13 +50,12 @@ func main() {
 			grpcSrv,
 		),
 	)
-	osg, err := opensergo.New(opensergo.WithEndpoint("localhost:9090"))
+	osg, err := opensergo.New(opensergo.WithEndpoint("locahost:9090"))
 	if err != nil {
-		return
+		log.Fatal(err)
 	}
-	err = osg.ReportMetadata(context.Background(), app)
-	if err != nil {
-		return
+	if err = osg.ReportMetadata(context.Background(), app); err != nil {
+		log.Fatal(err)
 	}
 	if err := app.Run(); err != nil {
 		log.Fatal(err)
