@@ -208,6 +208,8 @@ github.com/go-kratos/kratos/contrib/config/apollo/v2 v2.0.0-20220309025117-43870
 github.com/go-kratos/kratos/contrib/config/apollo/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:PWiCyKqHgmFFtNubdOPzc4nAQSrsGwilmtsqxWvwALA=
 github.com/go-kratos/kratos/contrib/metrics/prometheus/v2 v2.0.0-20220309025117-4387085047b9 h1:1/WY5AKK2GwFZUehplgRRXTHnZpscAjuh1BSyljpADc=
 github.com/go-kratos/kratos/contrib/metrics/prometheus/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:PwsSRS6KrgfeJ0Xdm1Q23ZneOqLGAR8mlRD1oJ0htME=
+github.com/go-kratos/kratos/contrib/opensergo/v2 v2.0.0-20220517145828-c8c870b77f70 h1:mrM4toV/alTsqbjODfCHDDitPZ3fb0hpzLmO3cZunv0=
+github.com/go-kratos/kratos/contrib/opensergo/v2 v2.0.0-20220517145828-c8c870b77f70/go.mod h1:ei3Vdpw5th6WO1ywr8E0Uuwrm0sz0frMXNEyoFZFxwA=
 github.com/go-kratos/kratos/contrib/registry/consul/v2 v2.0.0-20220309025117-4387085047b9 h1:4MvEYrjIlL5e7CLh4lAqf+CvdaBF9PXLqtyiBAIhOxM=
 github.com/go-kratos/kratos/contrib/registry/consul/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:UB1G3wVn0oR/viZXokBAopwHMDn3AuO11t2oRqa8zzY=
 github.com/go-kratos/kratos/contrib/registry/discovery/v2 v2.0.0-20220309025117-4387085047b9 h1:qAtn6DVgQbzXrwZXRmgqemJltEVMnPPrJaKsqLyS3j4=
@@ -223,8 +225,9 @@ github.com/go-kratos/kratos/contrib/registry/zookeeper/v2 v2.0.0-20220309025117-
 github.com/go-kratos/kratos/v2 v2.0.0/go.mod h1:USzTcAP7LS1rHVITQ/x/5JvlkUpG17pnfbqYV4j7SWc=
 github.com/go-kratos/kratos/v2 v2.0.3/go.mod h1:Hgl0YPry9YyLtwTTfwLfowPKg+YS0dgZ06O5NHqz5hE=
 github.com/go-kratos/kratos/v2 v2.1.5/go.mod h1:zMonCKAf8+He4b9NQ/QHr20tMznd4NO5XrNds36w/5k=
-github.com/go-kratos/kratos/v2 v2.2.0 h1:swSCoOdXD5F/L4eUfhapxSXe1I846hZz1wMLLixz9SA=
 github.com/go-kratos/kratos/v2 v2.2.0/go.mod h1:yebXu5KMayLjXZzMTY5HWIPRDwcBehHpiNF/Ot8A2pA=
+github.com/go-kratos/kratos/v2 v2.2.1 h1:sm29txvyqiQw4v+MftnYWTMgEBjjzWHjrim8kaTVQWE=
+github.com/go-kratos/kratos/v2 v2.2.1/go.mod h1:yebXu5KMayLjXZzMTY5HWIPRDwcBehHpiNF/Ot8A2pA=
 github.com/go-kratos/swagger-api v1.0.0 h1:R1JcAqLSvfDzqHoDnpK3Jt1MEJAXGNifV7AnBEhP3PE=
 github.com/go-kratos/swagger-api v1.0.0/go.mod h1:BPeS1OUN4jtMitb99ptZAagAgyQ51S2F2vd9dT/J3eM=
 github.com/go-logfmt/logfmt v0.3.0/go.mod h1:Qt1PoO58o5twSAckw1HlFXLmHsOX5/0LbT9GBnD5lWE=
@@ -596,6 +599,8 @@ github.com/onsi/gomega v1.10.3/go.mod h1:V9xEwhxec5O8UDM77eCW8vLymOMltsqPVYWrpDs
 github.com/onsi/gomega v1.10.5 h1:7n6FEkpFmfCoo2t+YYqXH0evK+a9ICQz0xcAy9dYcaQ=
 github.com/onsi/gomega v1.10.5/go.mod h1:gza4q3jKQJijlu05nKWRCW/GavJumGt8aNRxWg7mt48=
 github.com/op/go-logging v0.0.0-20160315200505-970db520ece7/go.mod h1:HzydrMdWErDVzsI23lYNej1Htcns9BCg93Dk0bBINWk=
+github.com/opensergo/opensergo-go v0.0.0-20220331070310-e5b01fee4d1c h1:Ivg+PYq7sOf2IwBGbo9Tt6jk+LHSUapWVPBEr9ygh8Q=
+github.com/opensergo/opensergo-go v0.0.0-20220331070310-e5b01fee4d1c/go.mod h1:VxL391S2BWXU1m14087xt8+2YTgsnfa+xsSrbuoFKl4=
 github.com/opentracing-contrib/go-observer v0.0.0-20170622124052-a52f23424492/go.mod h1:Ngi6UdF0k5OKD5t5wlmGhe/EDKPoUM3BXZSSfIuJbis=
 github.com/opentracing/basictracer-go v1.0.0/go.mod h1:QfBfYuafItcjQuMwinw9GhYKwFXS9KnPs5lxoYwgW74=
 github.com/opentracing/opentracing-go v1.0.2/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
