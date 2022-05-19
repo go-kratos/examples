@@ -28,7 +28,7 @@ type server struct {
 
 // SayHello implements helloworld.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *helloworld.HelloRequest) (*helloworld.HelloReply, error) {
-	return &helloworld.HelloReply{Message: fmt.Sprintf("Hello %s extra_meta: %s", in.Name)}, nil
+	return &helloworld.HelloReply{Message: fmt.Sprintf("Hello %s", in.Name)}, nil
 }
 
 func main() {
