@@ -2,8 +2,8 @@ package data
 
 import (
 	"context"
-
 	"github.com/go-kratos/examples/transaction/ent/internal/biz"
+
 	"github.com/go-kratos/examples/transaction/ent/internal/conf"
 	"github.com/go-kratos/examples/transaction/ent/internal/data/ent"
 
@@ -16,46 +16,16 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewTransaction, NewUserRepo, NewCardRepo)
+var ProviderSet = wire.NewSet(NewData, NewUserRepo, NewCardRepo, NewTransaction)
 
 // Data .
 type Data struct {
-	db *ent.Client
+	db *ent.Database
 }
 
-type contextTxKey struct{}
-
-func (d *Data) ExecTx(ctx context.Context, f func(ctx context.Context) error) error {
-	tx, err := d.db.Tx(ctx)
-	if err != nil {
-		return err
-	}
-	ctx = context.WithValue(ctx, contextTxKey{}, tx)
-	if err := f(ctx); err != nil {
-		_ = tx.Rollback()
-		return err
-	}
-	return tx.Commit()
-}
-
-func (d *Data) User(ctx context.Context) *ent.UserClient {
-	tx, ok := ctx.Value(contextTxKey{}).(*ent.Tx)
-	if ok {
-		return tx.User
-	}
-	return d.db.User
-}
-
-func (d *Data) Card(ctx context.Context) *ent.CardClient {
-	tx, ok := ctx.Value(contextTxKey{}).(*ent.Tx)
-	if ok {
-		return tx.Card
-	}
-	return d.db.Card
-}
-
-func NewTransaction(d *Data) biz.Transaction {
-	return d
+// NewTransaction .
+func NewTransaction(data *Data) biz.Transaction {
+	return data.db
 }
 
 // NewData .
@@ -65,23 +35,24 @@ func NewData(conf *conf.Data, logger log.Logger) (*Data, func(), error) {
 		conf.Database.Driver,
 		conf.Database.Source,
 	)
-	client := ent.NewClient(ent.Driver(drv))
 	if err != nil {
 		log.Errorf("failed opening connection to sqlite: %v", err)
 		return nil, nil, err
 	}
 	// Run the auto migration tool.
+	client := ent.NewClient(ent.Driver(drv))
 	if err := client.Schema.Create(context.Background()); err != nil {
 		log.Errorf("failed creating schema resources: %v", err)
 		return nil, nil, err
 	}
 
 	d := &Data{
-		db: client,
+		db: ent.NewDatabase(ent.Driver(drv)),
 	}
+
 	return d, func() {
 		log.Info("message", "closing the data resources")
-		if err := d.db.Close(); err != nil {
+		if err := drv.Close(); err != nil {
 			log.Error(err)
 		}
 	}, nil
