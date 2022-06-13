@@ -9,6 +9,7 @@ import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
+	grpc1 "google.golang.org/grpc"
 
 	"github.com/go-kratos/kratos/contrib/opensergo/v2"
 )
@@ -34,6 +35,7 @@ func (s *server) SayHello(ctx context.Context, in *helloworld.HelloRequest) (*he
 func main() {
 	grpcSrv := grpc.NewServer(
 		grpc.Address(":9000"),
+		grpc.Options(grpc1.MaxRecvMsgSize(10000)),
 	)
 	httpSrv := http.NewServer(
 		http.Address(":8000"),
