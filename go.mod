@@ -37,6 +37,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/soheilhy/cmux v0.1.4
 	go.etcd.io/etcd/client/v3 v3.5.1
+	go.mongodb.org/mongo-driver v1.9.1
 	go.opentelemetry.io/otel v1.3.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.3.0
 	go.opentelemetry.io/otel/sdk v1.3.0
