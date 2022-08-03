@@ -1,0 +1,10 @@
+version: "2"
+sql:
+  - schema: "schema.sql"
+    queries: "query.sql"
+    engine: "mysql"
+    gen:
+      go:
+        package: "queries"
+        out: "internal/data/queries"
+        emit_json_tags: true
