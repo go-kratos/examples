@@ -11,9 +11,9 @@ import (
 // NewWebsocketServer create a websocket server.
 func NewWebsocketServer(c *conf.Server, _ log.Logger, svc *service.ChatRoomService) *websocket.Server {
 	srv := websocket.NewServer(
-		websocket.Address(c.Websocket.Addr),
-		websocket.ReadHandle(c.Websocket.Path, svc.OnWebsocketMessage),
-		websocket.ConnectHandle(svc.OnWebsocketConnect),
+		websocket.WithAddress(c.Websocket.Addr),
+		websocket.WithReadHandle(c.Websocket.Path, svc.OnWebsocketMessage),
+		websocket.WithConnectHandle(svc.OnWebsocketConnect),
 	)
 
 	svc.SetWebsocketServer(srv)

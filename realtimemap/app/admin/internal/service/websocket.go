@@ -17,14 +17,14 @@ type WebsocketProto struct {
 	Payload interface{} `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
 }
 
-func (s *AdminService) OnWebsocketMessage(connectionId string, message *websocket.Message) (*websocket.Message, error) {
+func (s *AdminService) OnWebsocketMessage(connectionId string, message *websocket.Message) error {
 	s.log.Infof("[%s] Payload: %s\n", connectionId, string(message.Body))
 
 	var proto v1.WebsocketProto
 
 	if err := json.Unmarshal(message.Body, &proto); err != nil {
 		s.log.Error("Error unmarshalling proto json %v", err)
-		return nil, nil
+		return nil
 	}
 
 	switch proto.EventId {
@@ -32,13 +32,13 @@ func (s *AdminService) OnWebsocketMessage(connectionId string, message *websocke
 		var msg v1.Viewport
 		if err := json.Unmarshal([]byte(proto.Payload), &msg); err != nil {
 			s.log.Error("Error unmarshalling payload json %v", err)
-			return nil, nil
+			return nil
 		}
 
 		_ = s.OnWsSetViewport(connectionId, &msg)
 	}
 
-	return nil, nil
+	return nil
 }
 
 func (s *AdminService) OnWsSetViewport(connectionId string, msg *v1.Viewport) error {
