@@ -654,8 +654,8 @@ github.com/tklauser/numcpus v0.3.0/go.mod h1:yFGUr7TUHQRAhyqBcEg0Ge34zDBAsIvJJcy
 github.com/toolkits/concurrent v0.0.0-20150624120057-a4371d70e3e3 h1:kF/7m/ZU+0D4Jj5eZ41Zm3IH/J8OElK1Qtd7tVKAwLk=
 github.com/toolkits/concurrent v0.0.0-20150624120057-a4371d70e3e3/go.mod h1:QDlpd3qS71vYtakd2hmdpqhJ9nwv6mD6A30bQ1BPBFE=
 github.com/tv42/httpunix v0.0.0-20150427012821-b75d8614f926/go.mod h1:9ESjWnEqriFuLhtthL60Sar/7RFoluCcXsuvEwTV5KM=
-github.com/tx7do/kratos-transport v0.0.0-20220806094112-02553ebbf14c h1:DUka8o+IVlF2qjFuSnkZNY7RD3Rbv/wPTgsx4lVrxnU=
-github.com/tx7do/kratos-transport v0.0.0-20220806094112-02553ebbf14c/go.mod h1:dn5BA9wzyvnHDZQkMxrsuGOGqs9TKAAGx/ZOw5zd2RM=
+github.com/tx7do/kratos-transport v0.0.0-20220808043948-ddeb04987453 h1:dwBoQ9uMHP6NwptpUFkgLdSV87kTd3iDepoLNTji3t8=
+github.com/tx7do/kratos-transport v0.0.0-20220808043948-ddeb04987453/go.mod h1:dn5BA9wzyvnHDZQkMxrsuGOGqs9TKAAGx/ZOw5zd2RM=
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasthttp v1.38.0/go.mod h1:t/G+3rLek+CyY9bnIE+YlMRddxVAAGjhxndDB4i4C0I=
 github.com/valyala/tcplisten v1.0.0/go.mod h1:T0xQ8SeCZGxckz9qRXTfG43PvQ/mcWh7FwZEA7Ioqkc=
