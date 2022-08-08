@@ -111,7 +111,7 @@ func TestETCD(t *testing.T) {
 		t.Fatal(err)
 	}
 	tlsConf := &tls.Config{
-		ServerName:   "www.kratos.com",
+		ServerName:   "kratos.com",
 		RootCAs:      cp,
 		Certificates: []tls.Certificate{cert},
 	}
