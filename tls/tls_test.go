@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	etcdregistry "github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	pb "github.com/go-kratos/examples/helloworld/helloworld"
+	etcdregistry "github.com/go-kratos/kratos/contrib/registry/etcd/v2"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
@@ -86,7 +86,7 @@ func callHTTP(t *testing.T, r registry.Discovery, c *tls.Config) {
 	client := pb.NewGreeterHTTPClient(conn)
 	reply, err := client.SayHello(context.Background(), &pb.HelloRequest{Name: "kratos"})
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
 	}
 	t.Logf("[http] SayHello %+v\n", reply)
 }
@@ -111,7 +111,7 @@ func TestETCD(t *testing.T) {
 		t.Fatal(err)
 	}
 	tlsConf := &tls.Config{
-		ServerName:   "www.kratos.com",
+		ServerName:   "kratos.com",
 		RootCAs:      cp,
 		Certificates: []tls.Certificate{cert},
 	}

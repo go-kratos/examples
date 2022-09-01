@@ -1,70 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-    <title>Minimlist chat App</title>
-  </head>
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="index.css"/>
+    <title>Kratos Chat App</title>
+</head>
 
-  <body>
-    <div class="container">
-      <p class="msg">Messages:</p>
-      <div id="messages" class="messages"></div>
-      <form id="msgForm" class="msgForm">
+<body>
+<div class="container">
+    <p class="msg">Messages:</p>
+    <div id="messages" class="messages"></div>
+    <form id="msgForm" class="msgForm">
         <input
-          type="text"
-          placeholder="Send message"
-          class="input"
-          id="inputBox"
+                type="text"
+                placeholder="Send message"
+                class="input"
+                id="inputBox"
         />
-        <input type="submit" class="btn" value="Send" />
-      </form>
-    </div>
+        <input type="submit" class="btn" value="Send"/>
+    </form>
+</div>
 
-    <script type="text/javascript">
-      const ws = new WebSocket(`ws://localhost:7700`);
-      ws.binaryType = "arraybuffer";
+<script type="text/javascript" src="chat_client.js"></script>
 
-      // Log socket opening and closing
-      ws.addEventListener("open", (event) => {
-        console.log("Websocket connection opened");
-      });
-
-      ws.addEventListener("close", (event) => {
-        console.log("Websocket connection closed");
-      });
-
-      ws.onmessage = function (message) {
-        let dec = new TextDecoder("utf-8");
-        let packet = JSON.parse(dec.decode(message.data))
-
-        console.log(packet);
-
-        const msgDiv = document.createElement("div");
-        msgDiv.classList.add("msgCtn");
-
-        msgDiv.innerHTML = JSON.parse(packet.payload);
-        document.getElementById("messages").appendChild(msgDiv);
-      };
-
-      const form = document.getElementById("msgForm");
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const message = document.getElementById("inputBox").value;
-        console.log('Message: ' + message);
-
-        let packet = {
-          event_id: "chat",
-          payload: message,
-        };
-
-        let enc = new TextEncoder(); // always utf-8
-        ws.send(enc.encode(JSON.stringify(packet)));
-
-        document.getElementById("inputBox").value = "";
-      });
-    </script>
-  </body>
+</body>
 </html>
