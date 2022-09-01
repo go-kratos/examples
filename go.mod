@@ -5,6 +5,7 @@ go 1.16
 require (
 	entgo.io/ent v0.9.0
 	github.com/BurntSushi/toml v0.3.1
+	github.com/ajg/form v1.5.1 // indirect
 	github.com/envoyproxy/protoc-gen-validate v0.6.2
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-kratos/gin v0.1.0
@@ -23,19 +24,29 @@ require (
 	github.com/go-redis/redis/v8 v8.11.2
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/golang-jwt/jwt/v4 v4.2.0
+	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/wire v0.5.0
 	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0
 	github.com/hashicorp/consul/api v1.12.0
+	github.com/imkira/go-interpol v1.1.0 // indirect
+	github.com/kataras/iris/v12 v12.1.8
 	github.com/labstack/echo/v4 v4.6.3
+	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/nacos-group/nacos-sdk-go v1.0.9
 	github.com/nicksnyder/go-i18n/v2 v2.1.2
 	github.com/prometheus/client_golang v1.12.0
 	github.com/segmentio/kafka-go v0.4.27
+	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/soheilhy/cmux v0.1.4
+	github.com/valyala/fasthttp v1.39.0 // indirect
+	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
+	github.com/yalp/jsonpath v0.0.0-20180802001716-5cc68e5049a0 // indirect
+	github.com/yudai/gojsondiff v1.0.0 // indirect
+	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.1
 	go.opentelemetry.io/otel v1.3.0
 	go.opentelemetry.io/otel/exporters/jaeger v1.3.0
