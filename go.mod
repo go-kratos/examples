@@ -29,6 +29,7 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0
 	github.com/hashicorp/consul/api v1.12.0
+	github.com/kataras/iris/v12 v12.1.8 // indirect
 	github.com/labstack/echo/v4 v4.6.3
 	github.com/nacos-group/nacos-sdk-go v1.0.9
 	github.com/nicksnyder/go-i18n/v2 v2.1.2
