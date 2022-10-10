@@ -13,7 +13,7 @@ func NewKafkaServer(c *conf.Server, _ log.Logger, s *service.AdminService) *kafk
 	//ctx := context.Background()
 
 	srv := kafka.NewServer(
-		kafka.Address(c.Kafka.Addrs[0]),
+		kafka.WithAddress(c.Kafka.Addrs),
 	)
 
 	s.SetKafkaBroker(srv)
