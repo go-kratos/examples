@@ -8,7 +8,7 @@ import (
 
 type SensorDataRepo interface {
 	InsertSensorData(ctx context.Context, req *svcV1.SensorData) error
-	BatchInsertSensorData(ctx context.Context, sd []*svcV1.SensorData) error
+	BatchInsertSensorData(ctx context.Context, sd *[]svcV1.SensorData) error
 }
 
 type SensorDataUseCase struct {
@@ -25,6 +25,6 @@ func (uc *SensorDataUseCase) InsertSensorData(ctx context.Context, req *svcV1.Se
 	return uc.repo.InsertSensorData(ctx, req)
 }
 
-func (uc *SensorDataUseCase) BatchInsertSensorData(ctx context.Context, req []*svcV1.SensorData) error {
+func (uc *SensorDataUseCase) BatchInsertSensorData(ctx context.Context, req *[]svcV1.SensorData) error {
 	return uc.repo.BatchInsertSensorData(ctx, req)
 }

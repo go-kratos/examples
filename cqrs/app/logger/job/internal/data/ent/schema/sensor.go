@@ -27,15 +27,17 @@ func (Sensor) Annotations() []schema.Annotation {
 // Fields of the Sensor.
 func (Sensor) Fields() []ent.Field {
 	return []ent.Field{
-		field.Int64("id").
+		field.Int("id").
 			SchemaType(map[string]string{
 				dialect.MySQL:    "INT",
 				dialect.Postgres: "SERIAL",
 			}),
+
 		field.String("type").
 			Comment("传感器类型").
 			Default("").
 			MaxLen(50),
+
 		field.String("location").
 			Comment("所在位置").
 			Default("").

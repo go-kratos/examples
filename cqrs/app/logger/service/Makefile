@@ -1,1 +1,1 @@
-include ../../../app_makefile
+include ../../../app.mk

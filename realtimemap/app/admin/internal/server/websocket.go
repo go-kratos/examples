@@ -9,14 +9,15 @@ import (
 )
 
 // NewWebsocketServer create a websocket server.
-func NewWebsocketServer(c *conf.Server, _ log.Logger, s *service.AdminService) *websocket.Server {
+func NewWebsocketServer(c *conf.Server, _ log.Logger, svc *service.AdminService) *websocket.Server {
 	srv := websocket.NewServer(
 		websocket.WithAddress(c.Websocket.Addr),
-		websocket.WithReadHandle(c.Websocket.Path, s.OnWebsocketMessage),
-		websocket.WithConnectHandle(s.OnWebsocketConnect),
+		websocket.WithPath(c.Websocket.Path),
+		websocket.WithConnectHandle(svc.OnWebsocketConnect),
+		websocket.WithCodec("json"),
 	)
 
-	s.SetWebsocketServer(srv)
+	svc.SetWebsocketServer(srv)
 
 	return srv
 }

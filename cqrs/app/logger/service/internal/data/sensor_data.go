@@ -38,7 +38,7 @@ func (r *sensorDataRepo) ListSensorData(ctx context.Context, req *v1.ListSensorD
 	items := make([]*v1.SensorData, 0)
 	for _, u := range sensors {
 		item := v1.SensorData{
-			SensorId:    int64(u.ID),
+			SensorId:    u.ID,
 			Ts:          *u.Time,
 			Temperature: u.Temperature,
 			Cpu:         u.CPU,

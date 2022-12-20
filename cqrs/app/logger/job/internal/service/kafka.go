@@ -7,10 +7,10 @@ import (
 	svcV1 "kratos-cqrs/api/logger/service/v1"
 )
 
-func (s *LoggerJobService) InsertSensorData(ctx context.Context, topic string, headers broker.Headers, msg *[]*svcV1.SensorData) error {
+func (s *LoggerJobService) InsertSensorData(ctx context.Context, topic string, headers broker.Headers, msg *[]svcV1.SensorData) error {
 	fmt.Println("InsertSensorData() Topic: ", topic)
 
-	if err := s.sensorData.BatchInsertSensorData(context.Background(), *msg); err != nil {
+	if err := s.sensorData.BatchInsertSensorData(context.Background(), msg); err != nil {
 		s.log.Debug("InsertSensorData Insert", err.Error())
 		return err
 	}

@@ -27,17 +27,17 @@ function sendChatMessage(message) {
         timestamp: "",
     };
 
-    const str = JSON.stringify(packet);
-    const buff = new TextEncoder().encode(str);
-
-    sendMessage(0, buff);
+    sendMessage(0, packet);
 }
 
 function sendMessage(id, payload) {
-    let buff = new Uint8Array(4 + payload.byteLength);
+    const strPayload = JSON.stringify(payload);
+    const payloadBuff = new TextEncoder().encode(strPayload);
+
+    let buff = new Uint8Array(4 + payloadBuff.byteLength);
     let dv = new DataView(buff.buffer);
     dv.setInt32(0, id);
-    buff.set(payload, 4);
+    buff.set(payloadBuff, 4);
 
     console.log(ab2str(buff))
 

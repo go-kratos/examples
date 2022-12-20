@@ -37,7 +37,7 @@ func (r *sensorRepo) ListSensor(ctx context.Context, req *v1.ListSensorReq) (*v1
 	items := make([]*v1.Sensor, 0)
 	for _, u := range sensors {
 		item := v1.Sensor{
-			Id:       u.ID,
+			Id:       int64(u.ID),
 			Type:     u.Type,
 			Location: u.Location,
 		}

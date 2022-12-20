@@ -3,7 +3,6 @@ package server
 import (
 	"errors"
 
-	"github.com/go-kratos/kratos/v2/encoding"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/tx7do/kratos-transport/transport/websocket"
 
@@ -18,7 +17,7 @@ func NewWebsocketServer(c *conf.Server, _ log.Logger, svc *service.ChatRoomServi
 		websocket.WithAddress(c.Websocket.Addr),
 		websocket.WithPath(c.Websocket.Path),
 		websocket.WithConnectHandle(svc.OnWebsocketConnect),
-		websocket.WithCodec(encoding.GetCodec("json")),
+		websocket.WithCodec("json"),
 	)
 
 	svc.SetWebsocketServer(srv)
