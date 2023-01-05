@@ -43,6 +43,9 @@ func (s *BlogService) DeleteArticle(ctx context.Context, req *pb.DeleteArticleRe
 }
 
 func (s *BlogService) GetArticle(ctx context.Context, req *pb.GetArticleRequest) (*pb.GetArticleReply, error) {
+	if req.Id < 1 {
+		return nil, pb.ErrorBlogInvalidId("invalid article id")
+	}
 	tr := otel.Tracer("api")
 	ctx, span := tr.Start(ctx, "GetArticle")
 	defer span.End()
