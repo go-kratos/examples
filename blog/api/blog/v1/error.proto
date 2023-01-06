@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package blog.api.v1;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/go-kratos/examples/blog/api/blog/v1;v1";
+
+enum ErrorReason {
+    option (errors.default_code) = 500;
+
+    BLOG_INVALID_ID = 0;
+}

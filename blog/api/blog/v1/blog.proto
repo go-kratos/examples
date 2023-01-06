@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package blog.api.v1;
 
-option go_package = "github.com/go-kratos/examples/blog/api/v1;v1";
+option go_package = "github.com/go-kratos/examples/blog/api/blog/v1;v1";
 option java_multiple_files = true;
 option java_package = "blog.api.v1";
 
@@ -14,7 +14,7 @@ import "validate/validate.proto";
 service BlogService {
     rpc CreateArticle (CreateArticleRequest) returns (CreateArticleReply) {
         option (google.api.http) = {
-            post: "/v1/article/"
+            post: "/v1/article"
             body: "*"
         };
     }
@@ -36,7 +36,7 @@ service BlogService {
     }
     rpc ListArticle (ListArticleRequest) returns (ListArticleReply) {
         option (google.api.http) = {
-            get: "/v1/article/"
+            get: "/v1/article"
         };
     }
 }

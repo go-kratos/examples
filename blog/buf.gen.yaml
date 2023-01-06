@@ -1,0 +1,38 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/go-kratos/examples/blog/api
+    except:
+      - buf.build/googleapis/googleapis
+      - buf.build/envoyproxy/protoc-gen-validate
+      - buf.build/kratos/apis
+plugins:
+  # Use protoc-gen-go at v1.28.1
+  - plugin: buf.build/protocolbuffers/go:v1.28.1
+    out: api
+    opt: paths=source_relative
+  # Use the latest version of protoc-gen-go-grpc
+  - plugin: buf.build/grpc/go
+    out: api
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
+  - plugin: go-http
+    out: api
+    opt:
+      - paths=source_relative
+  - plugin: openapi
+    out: api
+    opt:
+      - paths=source_relative
+  # Use the latest version of protoc-gen-validate
+  - plugin:  buf.build/bufbuild/validate-go
+    out: api
+    opt:
+      - paths=source_relative
+      - lang=go
+  - plugin: go-errors
+    out: api
+    opt:
+      - paths=source_relative
