@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: blog/v1/blog.proto
 
-package apiv1
+package v1
 
 import (
 	context "context"
