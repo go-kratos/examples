@@ -1,5 +1,5 @@
 syntax = "proto3";
-package kratos.internal.conf;
+package blog.internal.conf;
 
 option go_package = "github.com/go-kratos/examples/blog/internal/conf;conf";
 
