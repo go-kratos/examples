@@ -1,0 +1,11 @@
+version: v1
+plugins:
+  # Use protoc-gen-go at v1.28.1
+  - plugin: buf.build/protocolbuffers/go:v1.28.1
+    out: ./
+    opt: paths=source_relative
+  # Use the latest version of protoc-gen-validate
+  - plugin:  buf.build/bufbuild/validate-go
+    out: ./
+    opt:
+      - paths=source_relative
