@@ -2,28 +2,28 @@ version: v1
 plugins:
   # Use protoc-gen-go at v1.28.1
   - plugin: buf.build/protocolbuffers/go:v1.28.1
-    out: api
+    out: ./
     opt: paths=source_relative
   # Use the latest version of protoc-gen-go-grpc
   - plugin: buf.build/grpc/go
-    out: api
+    out: ./
     opt:
       - paths=source_relative
       - require_unimplemented_servers=false
   - plugin: go-http
-    out: api
+    out: ./
     opt:
       - paths=source_relative
   - plugin: openapi
-    out: api
+    out: ./
     opt:
       - paths=source_relative
   # Use the latest version of protoc-gen-validate
   - plugin:  buf.build/bufbuild/validate-go
-    out: api
+    out: ./
     opt:
       - paths=source_relative
   - plugin: go-errors
-    out: api
+    out: ./
     opt:
       - paths=source_relative
