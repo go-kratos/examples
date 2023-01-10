@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>下载文件</title>
+</head>
+<body>
+    <button onclick="downloadExcel()">下载excel</button>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+<script>
+function downloadExcel() {
+  axios({
+    method: 'post',
+    url: "http://localhost:8001/download",
+    responseType: "arraybuffer"
+  }).then(function(res) {
+    const data = res.data;
+    const headers = res.headers;
+    const blob = new Blob([data])
+    const fileName = decodeURIComponent(headers["content-disposition"].split("filename=")[1])
+    let downloadElement = document.createElement('a');
+    let href = window.URL.createObjectURL(blob);
+    downloadElement.href = href;
+    downloadElement.download = fileName;
+    document.body.appendChild(downloadElement);
+    downloadElement.click();
+    document.body.removeChild(downloadElement);
+    window.URL.revokeObjectURL(href);
+  }).catch(function(err) {
+    console.log(err)
+  })
+}
+</script>
