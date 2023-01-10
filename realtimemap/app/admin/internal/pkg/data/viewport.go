@@ -1,5 +1,8 @@
 package data
 
-import v1 "kratos-realtimemap/api/admin/v1"
+import (
+	"github.com/tx7do/kratos-transport/transport/websocket"
+	v1 "kratos-realtimemap/api/admin/v1"
+)
 
-type ViewportMap map[string]*v1.Viewport
+type ViewportMap map[websocket.SessionID]*v1.Viewport

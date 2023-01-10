@@ -11,7 +11,7 @@ CREATE TABLE sensors
 -- 创建表 - 传感器遥感数据
 CREATE TABLE sensor_data
 (
-    id          SERIAL,
+    id          BIGSERIAL,
     time        BIGINT NOT NULL,
     sensor_id   INTEGER,
     temperature DOUBLE PRECISION,

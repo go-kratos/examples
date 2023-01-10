@@ -13,7 +13,7 @@ server:
 data:
   database:
     driver: postgres
-    source: host=localhost port=5432 user=postgres password=123456 dbname=postgres sslmode=disable
+    source: host=localhost port=5432 user=postgres password=123456 dbname=test sslmode=disable
   redis:
     addr: 127.0.0.1:6379
     read_timeout: 0.2s

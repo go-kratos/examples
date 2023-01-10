@@ -17,8 +17,8 @@ type WebsocketProto struct {
 	Payload interface{} `protobuf:"bytes,2,opt,name=payload,proto3" json:"payload,omitempty"`
 }
 
-func (s *AdminService) OnWebsocketMessage(connectionId string, message *websocket.Message) error {
-	s.log.Infof("[%s] Payload: %s\n", connectionId, string(message.Body))
+func (s *AdminService) OnWebsocketMessage(sessionId websocket.SessionID, message *websocket.Message) error {
+	s.log.Infof("[%s] Payload: %s\n", sessionId, string(message.Body))
 
 	var proto v1.WebsocketProto
 
@@ -35,21 +35,21 @@ func (s *AdminService) OnWebsocketMessage(connectionId string, message *websocke
 			return nil
 		}
 
-		_ = s.OnWsSetViewport(connectionId, &msg)
+		_ = s.OnWsSetViewport(sessionId, &msg)
 	}
 
 	return nil
 }
 
-func (s *AdminService) OnWsSetViewport(connectionId string, msg *v1.Viewport) error {
-	s.viewports[connectionId] = msg
+func (s *AdminService) OnWsSetViewport(sessionId websocket.SessionID, msg *v1.Viewport) error {
+	s.viewports[sessionId] = msg
 	return nil
 }
 
-func (s *AdminService) OnWebsocketConnect(connectionId string, register bool) {
+func (s *AdminService) OnWebsocketConnect(sessionId websocket.SessionID, register bool) {
 	if register {
 	} else {
-		delete(s.viewports, connectionId)
+		delete(s.viewports, sessionId)
 	}
 }
 
@@ -69,7 +69,7 @@ func (s *AdminService) BroadcastToWebsocketClient(eventId string, payload interf
 	var msg websocket.Message
 	msg.Body = bufProto
 
-	s.ws.Broadcast(&msg)
+	s.ws.Broadcast(websocket.MessageType(v1.MessageType_Notify), &msg)
 }
 
 func (s *AdminService) BroadcastVehiclePosition(positions data.PositionArray) {

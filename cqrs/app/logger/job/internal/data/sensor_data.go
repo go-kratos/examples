@@ -31,10 +31,10 @@ func (r *sensorDataRepo) InsertSensorData(ctx context.Context, req *svcV1.Sensor
 		Exec(ctx)
 }
 
-func (r *sensorDataRepo) BatchInsertSensorData(ctx context.Context, req []*svcV1.SensorData) error {
+func (r *sensorDataRepo) BatchInsertSensorData(ctx context.Context, req *[]svcV1.SensorData) error {
 	bulks := make([]*ent.SensorDataCreate, 0)
-	for i := 0; i < len(req); i++ {
-		s := req[i]
+	for i := 0; i < len(*req); i++ {
+		s := &(*req)[i]
 		bulk := r.data.db.SensorData.Create().
 			SetTime(s.Ts).
 			SetSensorID(int(s.SensorId)).

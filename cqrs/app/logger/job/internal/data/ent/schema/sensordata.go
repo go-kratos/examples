@@ -2,6 +2,7 @@ package schema
 
 import (
 	"entgo.io/ent"
+	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/entsql"
 	"entgo.io/ent/schema"
 	"entgo.io/ent/schema/field"
@@ -25,15 +26,33 @@ func (SensorData) Annotations() []schema.Annotation {
 // Fields of the SensorData.
 func (SensorData) Fields() []ent.Field {
 	return []ent.Field{
+		field.Int64("id").
+			SchemaType(map[string]string{
+				dialect.MySQL:    "BIGINT",
+				dialect.Postgres: "BIGSERIAL",
+			}),
+
 		field.Int64("time").
 			Comment("时间戳").
-			Nillable().Optional(),
+			Nillable().
+			Optional(),
+
 		field.Int("sensor_id").
 			Comment("传感器ID"),
+
 		field.Float("temperature").
-			Comment("温度"),
+			Comment("温度").
+			SchemaType(map[string]string{
+				dialect.MySQL:    "DOUBLE",
+				dialect.Postgres: "DOUBLE PRECISION",
+			}),
+
 		field.Float("cpu").
-			Comment("CPU使用率"),
+			Comment("CPU使用率").
+			SchemaType(map[string]string{
+				dialect.MySQL:    "DOUBLE",
+				dialect.Postgres: "DOUBLE PRECISION",
+			}),
 	}
 }
 
