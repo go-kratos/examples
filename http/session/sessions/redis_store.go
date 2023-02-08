@@ -29,7 +29,7 @@ type SessionSerializer interface {
 type JSONSerializer struct{}
 
 func (s JSONSerializer) Serialize(ss *Session) ([]byte, error) {
-	m := make(map[string]any, len(ss.Values))
+	m := make(map[string]interface{}, len(ss.Values))
 	for k, v := range ss.Values {
 		ks, ok := k.(string)
 		if !ok {
@@ -42,7 +42,7 @@ func (s JSONSerializer) Serialize(ss *Session) ([]byte, error) {
 }
 
 func (s JSONSerializer) Deserialize(d []byte, ss *Session) error {
-	m := make(map[string]any)
+	m := make(map[string]interface{})
 	err := json.Unmarshal(d, &m)
 	if err != nil {
 		return err

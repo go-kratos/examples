@@ -1,4 +1,4 @@
-package session
+package main
 
 import (
 	"context"

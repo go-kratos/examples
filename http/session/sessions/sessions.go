@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	gob.Register([]any{})
+	gob.Register([]interface{}{})
 }
 
 // Default flashes key.
@@ -36,7 +36,7 @@ type Options struct {
 // Session stores the values and optional configuration for a session.
 type Session struct {
 	ID      string
-	Values  map[any]any
+	Values  map[interface{}]interface{}
 	Options *Options
 	IsNew   bool
 	store   Store
@@ -46,7 +46,7 @@ type Session struct {
 // NewSession is called by session stores to create a new session instance.
 func NewSession(store Store, name string) *Session {
 	return &Session{
-		Values:  make(map[any]any),
+		Values:  make(map[interface{}]interface{}),
 		store:   store,
 		name:    name,
 		Options: new(Options),
@@ -57,8 +57,8 @@ func NewSession(store Store, name string) *Session {
 //
 // A single variadic argument is accepted, and it is optional: it defines
 // the flash key. If not defined "_flash" is used by default.
-func (s *Session) Flashes(vars ...string) []any {
-	var flashes []any
+func (s *Session) Flashes(vars ...string) []interface{} {
+	var flashes []interface{}
 	key := flashesKey
 	if len(vars) > 0 {
 		key = vars[0]
@@ -66,7 +66,7 @@ func (s *Session) Flashes(vars ...string) []any {
 	if v, ok := s.Values[key]; ok {
 		// Drop the flashes and return it.
 		delete(s.Values, key)
-		flashes = v.([]any)
+		flashes = v.([]interface{})
 	}
 	return flashes
 }
@@ -75,14 +75,14 @@ func (s *Session) Flashes(vars ...string) []any {
 //
 // A single variadic argument is accepted, and it is optional: it defines
 // the flash key. If not defined "_flash" is used by default.
-func (s *Session) AddFlash(value any, vars ...string) {
+func (s *Session) AddFlash(value interface{}, vars ...string) {
 	key := flashesKey
 	if len(vars) > 0 {
 		key = vars[0]
 	}
-	var flashes []any
+	var flashes []interface{}
 	if v, ok := s.Values[key]; ok {
-		flashes = v.([]any)
+		flashes = v.([]interface{})
 	}
 	s.Values[key] = append(flashes, value)
 }
