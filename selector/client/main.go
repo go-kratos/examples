@@ -6,14 +6,13 @@ import (
 	"time"
 
 	"github.com/go-kratos/kratos/contrib/registry/consul/v2"
-	"github.com/go-kratos/examples/helloworld/helloworld"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
 	"github.com/go-kratos/kratos/v2/selector/filter"
-	"github.com/go-kratos/kratos/v2/selector/p2c"
-	"github.com/go-kratos/kratos/v2/selector/wrr"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/hashicorp/consul/api"
+
+	"github.com/go-kratos/examples/helloworld/helloworld"
 )
 
 func main() {
@@ -30,8 +29,7 @@ func main() {
 		grpc.WithDiscovery(r),
 		// 由于gRPC框架的限制只能使用全局balancer+filter的方式来实现selector
 		// 这里使用weighted round robin算法的balancer+静态version=1.0.0的Filter
-		grpc.WithBalancerName(wrr.Name),
-		grpc.WithFilter(
+		grpc.WithNodeFilter(
 			filter.Version("1.0.0"),
 		),
 	)
@@ -50,9 +48,7 @@ func main() {
 		http.WithEndpoint("discovery:///helloworld"),
 		http.WithDiscovery(r),
 		// 这里使用p2c算法的balancer+静态version=2.0.0的Filter组成一个selector
-		http.WithSelector(
-			p2c.New(p2c.WithFilter(filter.Version("2.0.0"))),
-		),
+		http.WithNodeFilter(filter.Version("2.0.0")),
 	)
 	if err != nil {
 		log.Fatal(err)
