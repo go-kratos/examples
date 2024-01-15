@@ -1,0 +1,111 @@
+syntax = "proto3";
+
+package system.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "pagination/v1/pagination.proto";
+
+// 后台菜单服务
+service MenuService {
+  // 查询菜单列表
+  rpc ListMenu (pagination.PagingRequest) returns (ListMenuResponse) {}
+
+  // 查询菜单详情
+  rpc GetMenu (GetMenuRequest) returns (Menu) {}
+
+  // 创建菜单
+  rpc CreateMenu (CreateMenuRequest) returns (google.protobuf.Empty) {}
+
+  // 更新菜单
+  rpc UpdateMenu (UpdateMenuRequest) returns (google.protobuf.Empty) {}
+
+  // 删除菜单
+  rpc DeleteMenu (DeleteMenuRequest) returns (google.protobuf.Empty) {}
+}
+
+enum MenuType {
+  FOLDER = 0;  // 菜单夹
+  MENU = 1;  // 菜单项
+  BUTTON = 2;  // 按钮
+}
+
+// 菜单
+message Menu {
+  int32 id = 1;
+  optional int32 parentId = 2;
+  optional int32 orderNo = 3;
+
+  optional string name = 4;
+  optional MenuType type = 5 [
+    (gnostic.openapi.v3.property) = {
+      description: "类型"
+      default: {string: "FOLDER"}
+    }
+  ];
+  optional string status = 6 [
+    (gnostic.openapi.v3.property) = {
+      description: "状态"
+      default: {string: "ON"}
+      enum: [{yaml: "ON"}, {yaml: "OFF"}]
+    }
+  ];
+
+  optional string path = 7;
+  optional string title = 8;
+  optional string component = 9;
+  optional string icon = 10;
+
+  repeated string permissions = 11;
+  repeated Menu children = 12;
+
+  optional bool keepAlive = 13;
+  optional bool show = 14;
+
+  optional bool isExt = 15;
+  optional string extUrl = 16;
+
+  optional bool hideBreadcrumb = 17;
+  optional bool hideTab = 18;
+  optional bool hideMenu = 19;
+  optional bool hideChildrenInMenu = 20;
+  optional bool hidePathForChildren = 21;
+
+  optional string currentActiveMenu = 22;
+  optional string redirect = 23;
+
+  optional string createTime = 30;
+  optional string updateTime = 31;
+  optional string deleteTime = 32;
+}
+
+// 查询菜单列表 - 回应
+message ListMenuResponse {
+  repeated Menu items = 1;
+  int32 total = 2;
+}
+
+// 查询菜单详情 - 请求
+message GetMenuRequest {
+  int32 id = 1;
+}
+
+// 创建菜单 - 请求
+message CreateMenuRequest {
+  Menu menu = 1;
+  optional uint32 operatorId = 2;
+}
+
+// 更新菜单 - 请求
+message UpdateMenuRequest {
+  Menu menu = 1;
+  optional uint32 operatorId = 3;
+}
+
+// 删除菜单 - 请求
+message DeleteMenuRequest {
+  int32 id = 1;
+  optional uint32 operatorId = 2;
+}

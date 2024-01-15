@@ -1,0 +1,22 @@
+### 用户列表
+GRPC localhost:10800/user.service.v1.UserService/ListUser
+
+### 获取一个用户
+GRPC localhost:10800/user.service.v1.UserService/GetUser
+
+{
+  "id": 1
+}
+
+### 创建一个用户
+GRPC localhost:10800/user.service.v1.UserService/CreateUser
+
+### 更新一个用户
+GRPC localhost:10800/user.service.v1.UserService/UpdateUser
+
+### 删除一个用户
+GRPC localhost:10800/user.service.v1.UserService/DeleteUser
+
+{
+  "id": 1
+}

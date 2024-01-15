@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package system.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "pagination/v1/pagination.proto";
+
+// 字典服务
+service DictService {
+  // 查询字典列表
+  rpc ListDict (pagination.PagingRequest) returns (ListDictResponse) {}
+
+  // 查询字典
+  rpc GetDict (GetDictRequest) returns (Dict) {}
+
+  // 创建字典
+  rpc CreateDict (CreateDictRequest) returns (google.protobuf.Empty) {}
+
+  // 更新字典
+  rpc UpdateDict (UpdateDictRequest) returns (google.protobuf.Empty) {}
+
+  // 删除字典
+  rpc DeleteDict (DeleteDictRequest) returns (google.protobuf.Empty) {}
+}
+
+// 数据字典
+message Dict {
+  uint32 id = 1 [(gnostic.openapi.v3.property) = {description: "ID"}];// ID
+  optional string name = 2 [(gnostic.openapi.v3.property) = {description: "字典名称"}];// 字典名称
+  optional string description = 3 [(gnostic.openapi.v3.property) = {description: "描述"}];// 描述
+
+  optional uint32 creatorId = 10 [(gnostic.openapi.v3.property) = {description: "创建者ID"}]; // 创建者ID
+  optional uint32 creatorName = 11 [(gnostic.openapi.v3.property) = {description: "创建者名字"}]; // 创建者名字
+
+  optional string createTime = 20;// 创建时间
+  optional string updateTime = 21;// 更新时间
+  optional string deleteTime = 22;// 删除时间
+}
+
+// 查询字典列表 - 答复
+message ListDictResponse {
+  repeated Dict items = 1;
+  int32 total = 2;
+}
+
+// 查询字典 - 请求
+message GetDictRequest {
+  uint32 id = 1;
+  optional string name = 2;
+}
+
+// 创建字典 - 请求
+message CreateDictRequest {
+  Dict dict = 1;
+  optional uint32 operatorId = 2;
+}
+
+// 更新字典 - 请求
+message UpdateDictRequest {
+  Dict dict = 1;
+  optional uint32 operatorId = 2;
+}
+
+// 删除字典 - 请求
+message DeleteDictRequest {
+  uint32 id = 1;
+  optional uint32 operatorId = 2;
+}

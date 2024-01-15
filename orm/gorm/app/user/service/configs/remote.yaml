@@ -1,0 +1,6 @@
+config:
+  type: "consul"
+  consul:
+    scheme: "http"
+    address: "127.0.0.1:8500"
+    key: "kratos-gorm-example/user/service"
