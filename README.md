@@ -31,3 +31,5 @@ English | [简体中文](README-CN.md)
 | [validate](./validate)       | Example of Protobuf parameter validator usage                           |
 | [ws](./ws)                   | ws is implementation of transport interface with websocket example      |
 | [monolithic](./monolithic)   | Monolithic Application example, including frontend and backends.        |
+| [ent orm](./orm/ent/)        | CURD full application example of Ent.                                   |
+| [gorm](./monolithic)         | CURD full application example of GORM.                                  |

@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+// 配置服务
+message RemoteConfig {
+  message Nacos {
+    string address = 1; // 服务端地址
+    uint64 port = 2; // 服务端端口
+    string key = 3; //
+  }
+
+  message Etcd {
+    repeated string endpoints = 1;
+    google.protobuf.Duration timeout = 2;
+    string key = 3; //
+  }
+
+  message Consul {
+    string scheme = 1;  // 网络样式
+    string address = 2; // 服务端地址
+    string key = 3; //
+  }
+
+  message Apollo {
+    string endpoint = 1;
+    string app_id = 2;
+    string cluster = 3;
+    string namespace = 4;
+    string secret = 5;
+  }
+
+  message Kubernetes {
+    string namespace = 1;
+  }
+
+  message Polaris {
+
+  }
+
+  string type = 1;
+
+  Etcd etcd = 2;
+  Consul consul = 3;
+  Nacos nacos = 4;
+  Apollo apollo = 6;
+  Kubernetes kubernetes = 7;
+  Polaris polaris = 8;
+}

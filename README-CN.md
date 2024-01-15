@@ -31,3 +31,5 @@
 | [validate](./validate)       | Protobuf 参数校验器使用示例                        |
 | [ws](./ws)                   | 最简单的 Websocket 示例                            |
 | [monolithic](./monolithic)   | 巨石系统（单体系统）应用实例，包含前后端。         |
+| [ent orm](./orm/ent/)        | Ent 的 CURD 完整应用实例。                         |
+| [gorm](./monolithic)         | GORM 的 CURD 完整应用实例。                        |
