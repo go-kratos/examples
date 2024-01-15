@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package system.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "pagination/v1/pagination.proto";
+
+// 数据字典详情服务
+service DictDetailService {
+  // 查询字典详情列表
+  rpc ListDictDetail (pagination.PagingRequest) returns (ListDictDetailResponse) {}
+
+  // 查询字典详情
+  rpc GetDictDetail (GetDictDetailRequest) returns (DictDetail) {}
+
+  // 创建字典详情
+  rpc CreateDictDetail (CreateDictDetailRequest) returns (google.protobuf.Empty) {}
+
+  // 更新字典详情
+  rpc UpdateDictDetail (UpdateDictDetailRequest) returns (google.protobuf.Empty) {}
+
+  // 删除字典详情
+  rpc DeleteDictDetail (DeleteDictDetailRequest) returns (google.protobuf.Empty) {}
+
+  rpc GetDictDetailByCode (system.service.v1.GetDictDetailRequest) returns (system.service.v1.DictDetail) {}
+}
+
+// 数据字典详情
+message DictDetail {
+  uint32 id = 1 [(gnostic.openapi.v3.property) = {description: "字典详情ID"}];// ID
+  optional uint32 dictId = 2 [(gnostic.openapi.v3.property) = {description: "字典ID"}];// ID
+  optional int32 orderNo = 3[(gnostic.openapi.v3.property) = {description: "排序号"}];
+
+  optional string label = 4[(gnostic.openapi.v3.property) = {description: "字典标签"}];// 字典标签
+  optional string value = 5[(gnostic.openapi.v3.property) = {description: "字典值"}];// 字典值
+
+  optional uint32 creatorId = 10 [(gnostic.openapi.v3.property) = {description: "创建者ID"}]; // 创建者ID
+  optional uint32 creatorName = 11 [(gnostic.openapi.v3.property) = {description: "创建者名字"}]; // 创建者名字
+
+  optional string createTime = 20;// 创建时间
+  optional string updateTime = 21;// 更新时间
+  optional string deleteTime = 22;// 删除时间
+}
+
+// 查询字典详情列表 - 答复
+message ListDictDetailResponse {
+  repeated DictDetail items = 1;
+  int32 total = 2;
+}
+
+// 查询字典详情 - 请求
+message GetDictDetailRequest {
+  uint32 id = 1;
+  optional string code = 3;
+}
+
+// 创建字典详情 - 请求
+message CreateDictDetailRequest {
+  DictDetail detail = 1;
+  optional uint32 operatorId = 2;
+}
+
+// 更新字典详情 - 请求
+message UpdateDictDetailRequest {
+  DictDetail detail = 1;
+  optional uint32 operatorId = 2;
+}
+
+// 删除字典详情 - 请求
+message DeleteDictDetailRequest {
+  uint32 id = 1;
+  optional uint32 operatorId = 2;
+}
