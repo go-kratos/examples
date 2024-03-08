@@ -1,11 +1,12 @@
 version: v1
 breaking:
-  use:
-    - FILE
+   use:
+      - FILE
 deps:
-  - buf.build/googleapis/googleapis
-  - buf.build/envoyproxy/protoc-gen-validate
-  - buf.build/kratos/apis
+   - buf.build/googleapis/googleapis
+   - buf.build/envoyproxy/protoc-gen-validate
+   - buf.build/kratos/apis
+   - buf.build/bufbuild/protovalidate
 lint:
-  use:
-    - DEFAULT
+   use:
+      - DEFAULT
