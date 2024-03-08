@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/bufbuild/protovalidate-go"
 	v1 "github.com/go-kratos/examples/blog/api/blog/v1"
 	"github.com/go-kratos/examples/blog/internal/conf"
 	"github.com/go-kratos/examples/blog/internal/service"
@@ -13,13 +14,14 @@ import (
 )
 
 // NewGRPCServer new a gRPC server.
-func NewGRPCServer(c *conf.Server, logger log.Logger, blog *service.BlogService) *grpc.Server {
+func NewGRPCServer(validator *protovalidate.Validator, c *conf.Server, logger log.Logger, blog *service.BlogService) *grpc.Server {
 	opts := []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
 			tracing.Server(),
 			logging.Server(logger),
 			validate.Validator(),
+			Validator(validator), // buf生态Validator
 		),
 	}
 	if c.Grpc.Network != "" {

@@ -3,9 +3,12 @@ module github.com/go-kratos/examples
 go 1.16
 
 require (
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.32.0-20240221180331-f05a6f4403ce.1
 	entgo.io/ent v0.9.0
 	github.com/BurntSushi/toml v0.3.1
-	github.com/envoyproxy/protoc-gen-validate v1.0.1
+	github.com/bufbuild/protovalidate-go v0.6.0
+	github.com/buger/jsonparser v1.1.1 // indirect
+	github.com/envoyproxy/protoc-gen-validate v1.0.4
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-kratos/gin v0.1.0
 	github.com/go-kratos/kratos/contrib/config/apollo/v2 v2.0.0-20220309025117-4387085047b9
@@ -45,11 +48,11 @@ require (
 	go.opentelemetry.io/otel/sdk v1.16.0
 	go.opentelemetry.io/otel/trace v1.16.0
 	go.uber.org/zap v1.19.0
-	golang.org/x/text v0.11.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20230629202037-9506855d4529
-	google.golang.org/grpc v1.56.1
+	golang.org/x/text v0.14.0
+	google.golang.org/genproto/googleapis/api v0.0.0-20230913181813-007df8e322eb
+	google.golang.org/grpc v1.57.0
 	google.golang.org/grpc/examples v0.0.0-20220105183818-2fb1ac854b20 // indirect
-	google.golang.org/protobuf v1.31.0
+	google.golang.org/protobuf v1.32.0
 	gorm.io/driver/mysql v1.3.2
 	gorm.io/gorm v1.23.2
 )

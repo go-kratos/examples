@@ -4,6 +4,7 @@ import (
 	"flag"
 	"os"
 
+	"github.com/bufbuild/protovalidate-go"
 	"github.com/go-kratos/examples/blog/internal/conf"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -90,7 +91,13 @@ func main() {
 		panic(err)
 	}
 
-	app, cleanup, err := initApp(bc.Server, bc.Data, logger)
+	// 初始化校验器
+	validator, err := protovalidate.New(protovalidate.WithFailFast(true))
+	if err != nil {
+		panic(err)
+	}
+
+	app, cleanup, err := initApp(validator, bc.Server, bc.Data, logger)
 	if err != nil {
 		panic(err)
 	}

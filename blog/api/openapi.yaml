@@ -57,8 +57,7 @@ paths:
                   in: path
                   required: true
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -81,8 +80,7 @@ paths:
                   in: path
                   required: true
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -111,8 +109,7 @@ paths:
                   in: path
                   required: true
                   schema:
-                    type: integer
-                    format: int64
+                    type: string
             responses:
                 "200":
                     description: OK
@@ -132,15 +129,13 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 title:
                     type: string
                 content:
                     type: string
                 like:
-                    type: integer
-                    format: int64
+                    type: string
         CreateArticleReply:
             type: object
             properties:
@@ -151,6 +146,7 @@ components:
             properties:
                 title:
                     type: string
+                    description: 'doc: https://github.com/bufbuild/protovalidate'
                 content:
                     type: string
         DeleteArticleReply:
@@ -201,8 +197,7 @@ components:
             type: object
             properties:
                 id:
-                    type: integer
-                    format: int64
+                    type: string
                 title:
                     type: string
                 content:
