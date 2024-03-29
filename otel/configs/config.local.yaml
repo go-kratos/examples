@@ -1,0 +1,33 @@
+metadata:
+  name: "otel-test"
+  env: PRD
+otel:
+  trace:
+    endpoint: "collector:4318"
+    insecure: true
+  metric:
+    enable_exemplar: true
+log:
+  filepath: ""
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 1s
+  pprof:
+    addr: 0.0.0.0:6060
+
+data:
+  database:
+    driver: mysql
+    source: root:123456@tcp(127.0.0.1:3307)/information_schema?parseTime=True&loc=Local
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+  kafka:
+    broker_list:
+      - "127.0.0.1:9092"
+    group_id: "test1"

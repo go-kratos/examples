@@ -1,0 +1,73 @@
+apiVersion: 1
+
+datasources:
+  - name: Mimir
+    type: prometheus
+    access: proxy
+    orgId: 1
+    url: http://otel.test/metrics
+    version: 1
+    editable: true
+    jsonData:
+      httpHeaderName1: 'X-Scope-OrgID'
+      # link to trace
+      exemplarTraceIdDestinations:
+        - name: "trace_id"
+          datasourceUid: "Tempo"
+          urlDisplayLabel: 'View Trace'
+
+    secureJsonData:
+      httpHeaderValue1: 'demo'
+    isDefault: true
+  - name: Loki
+    uid: Loki
+    type: loki
+    access: proxy
+    orgId: 1
+    url: http://otel.test/logs
+    version: 1
+    editable: true
+    jsonData:
+      httpHeaderName1: 'X-Scope-OrgID'
+      # 这是关键的部分，需要定义派生字段以进行trace联动
+      derivedFields:
+        - name: traceID
+          datasourceUid: Tempo # 这里应该是Grafana中定义Tempo数据源的UID
+          matcherRegex: ".*trace.id\":\"(\\w+)\""
+          url: "$${__value.raw}" # 将值转换为URL的模板
+          # optional for URL Label to set a custom display label for the link.
+          urlDisplayLabel: 'View Trace'
+    secureJsonData:
+      httpHeaderValue1: 'demo'
+
+  - name: Tempo
+    uid: Tempo
+    type: tempo
+    access: proxy
+    orgId: 1
+    url: http://otel.test/traces
+    version: 1
+    editable: true
+    jsonData:
+      httpHeaderName1: 'X-Scope-OrgID'
+      tracesToLogsV2:
+        customQuery: true
+        datasourceUid: "Loki"
+        query: "{filename=\"app.log\"}|=\"$${__trace.traceId}\""
+        spanEndTimeShift: "+30m"
+        spanStartTimeShift: "-30m"
+    secureJsonData:
+      httpHeaderValue1: 'demo'
+  - access: proxy
+    basicAuth: false
+    editable: true
+    name: Phlare
+    type: phlare
+    uid: phlare
+    orgId: 1
+    url: http://otel.test/profilings
+    version: 1
+    jsonData:
+      httpHeaderName1: 'X-Scope-OrgID'
+    secureJsonData:
+      httpHeaderValue1: 'demo'
