@@ -48,7 +48,7 @@ message Article {
 message CreateArticleRequest {
     // doc: https://github.com/bufbuild/protovalidate
     string title = 1 [json_name = "title", (buf.validate.field).cel = {
-            id: "CreateArticleRequest.password",
+            id: "CreateArticleRequest.title",
             message: "the title of string must be between 5 and 50 character",
             expression: "size(this) > 5 && size(this) <= 50",
         }]; // the title of string must be between 5 and 50 character
