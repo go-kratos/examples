@@ -1,0 +1,26 @@
+multitenancy_enabled: true
+
+ingester:
+  lifecycler:
+    ring:
+      kvstore:
+        store: memberlist 
+      replication_factor: 1
+
+memberlist:
+  join_members: [phlare]
+
+phlaredb:
+  data_path: /data/ingester
+
+tracing:
+  enabled: false
+
+storage:
+  backend: s3
+  s3:
+    endpoint: minio:9000
+    access_key_id: minio
+    secret_access_key: 12345678
+    insecure: true
+    bucket_name: phlare

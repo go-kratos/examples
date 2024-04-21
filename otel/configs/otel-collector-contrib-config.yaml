@@ -1,0 +1,21 @@
+receivers:
+  filelog:
+    include: [/var/log/app.log]
+
+exporters:
+  loki:
+    endpoint: http://loki:3100/loki/api/v1/push
+    tenant_id: demo
+    labels:
+      attributes:
+        log.file.name: "filename"
+        
+processors:
+  batch:
+
+service:
+  pipelines:
+    logs:
+      receivers: [filelog]
+      processors: [batch]
+      exporters: [loki]

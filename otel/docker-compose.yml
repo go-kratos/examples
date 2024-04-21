@@ -1,0 +1,170 @@
+version: '3.3'
+services:
+  minio:
+    image: minio/minio
+    entrypoint: [""]
+    command: ["sh", "-c", "mkdir -p /data/mimir-blocks /data/mimir-ruler /data/mimir-alertmanager /data/tempo /data/loki-data /data/loki-ruler /data/phlare && minio server /data --console-address :9001"]
+    environment:
+      - MINIO_ACCESS_KEY=minio
+      - MINIO_SECRET_KEY=12345678
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9001:9001"
+  
+  redis:
+    image: redis:6.2.7
+  
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+
+  grafana:
+    image: grafana/grafana:10.4.1
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_USERS_DEFAULT_THEME=light
+      - GF_LOG_MODE=console
+      - GF_LOG_LEVEL=critical
+      - GF_FEATURE_TOGGLES_ENABLE=flameGraph
+      - GF_DIAGNOSTICS_PROFILING_ENABLED=true
+    volumes:
+      - ./configs/grafana/grafana-provisioning-dashboards.yaml:/etc/grafana/provisioning/dashboards/provisioning-dashboards.yaml:ro
+      - ./configs/grafana/grafana-provisioning-datasources.yaml:/etc/grafana/provisioning/datasources/provisioning-datasources.yaml:ro
+      - ./configs/grafana/lgtm-demo.json:/var/lib/grafana/dashboards/lgtm-demo.json:ro
+    ports:
+      - "3000:3000"
+
+
+  mimir:
+    image: grafana/mimir:2.6.0
+    command: ["-config.file=/etc/mimir.yaml"]
+    hostname: mimir
+    depends_on:
+      - minio
+    volumes:
+      - ./configs/mimir.yaml:/etc/mimir.yaml
+      - mimir-data:/data
+
+  loki:
+    image: grafana/loki:2.7.3
+    command: "-config.file=/etc/loki/config.yaml"
+    ports:
+      - 3101:3100
+      - 7946
+      - 9095
+    volumes:
+      - ./configs/loki.yaml:/etc/loki/config.yaml
+    depends_on:
+      - minio
+
+  tempo:
+    image: grafana/tempo:2.4.1
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./configs/tempo.yaml:/etc/tempo.yaml
+      - tempo-data:/tmp/tempo
+    ports:
+      - "14268"    
+      - "4317"
+      - 3200:3200
+    depends_on:
+      - minio
+
+  phlare:
+    image: grafana/phlare:0.1.2
+    ports:
+      - 4100:4100
+    command: -config.file=/etc/phlare/config.yaml
+    volumes:
+      - ./configs/phlare.yaml:/etc/phlare/config.yaml
+      - phlare-data:/data
+
+  phlare-agent:
+    image: grafana/phlare:0.1.2
+    command: ["-config.file=/etc/phlare/agent.yaml", "-log.level=debug"]
+    depends_on:
+      - minio
+      - otel.test
+    volumes:
+      - ./configs/phlare_agent.yaml:/etc/phlare/agent.yaml
+
+  collector:
+    image: otel/opentelemetry-collector:0.71.0
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./configs/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - 18889:8889
+    depends_on:
+      - tempo
+      - mimir
+
+  collector-contrib:
+    image: otel/opentelemetry-collector-contrib:0.71.0
+    command: ["--config=/etc/otel-collector-contrib-config.yaml"]
+    volumes:
+      - ./configs/otel-collector-contrib-config.yaml:/etc/otel-collector-contrib-config.yaml
+      - log-data:/var/log
+    depends_on:
+      - loki
+
+  otel.test:
+    image: nginx:1.23.1
+    volumes:
+      - ./configs/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 9090:80
+    depends_on:
+      - mimir
+      - loki
+      - tempo
+      - phlare
+  
+  app:
+    build: .
+    command:
+      - "./otel"
+      - "-conf"
+      - "/data/conf/config.yaml"
+    ports:
+      - 8000:8000
+      - 6060:6060
+    volumes:
+      - log-data:/var/log
+      - ./configs:/data/conf
+    depends_on:
+      - redis
+      - mysql
+      - collector
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+
+volumes:
+  mimir-data:
+  tempo-data:
+  minio-data:
+  phlare-data:
+  log-data:
+

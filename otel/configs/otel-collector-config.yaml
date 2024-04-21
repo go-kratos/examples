@@ -1,0 +1,40 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+      
+  prometheus:
+    config:
+      scrape_configs:
+      - job_name: 'app'
+        scrape_interval: 10s
+        static_configs:
+        - targets: ['app:8000']
+
+exporters:
+  otlp:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+
+  prometheusremotewrite:
+    endpoint: http://mimir:8080/api/v1/push
+    tls:
+      insecure: true
+    headers:
+      X-Scope-OrgID: demo
+
+processors:
+  batch:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+    metrics:
+      receivers: [prometheus]
+      processors: [batch]
+      exporters: [prometheusremotewrite]
