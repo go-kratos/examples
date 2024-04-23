@@ -6,6 +6,7 @@
 package main
 
 import (
+	"github.com/bufbuild/protovalidate-go"
 	"github.com/go-kratos/examples/blog/internal/biz"
 	"github.com/go-kratos/examples/blog/internal/conf"
 	"github.com/go-kratos/examples/blog/internal/data"
@@ -17,6 +18,6 @@ import (
 )
 
 // initApp init kratos application.
-func initApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
+func initApp(*protovalidate.Validator, *conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
 	panic(wire.Build(server.ProviderSet, data.ProviderSet, biz.ProviderSet, service.ProviderSet, newApp))
 }

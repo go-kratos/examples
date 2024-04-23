@@ -2,14 +2,22 @@
 version: v1
 deps:
   - remote: buf.build
+    owner: bufbuild
+    repository: protovalidate
+    commit: f05a6f4403ce4327bae4f50f281c3ed0
+    digest: shake256:668a0661b8df44d41839194896329330965fc215f3d2f88057fd60eeb759c2daf6cc6edfdd13b2a653d49fe2896ebedcb1a33c4c5b2dd10919f03ffb7fc52ae6
+  - remote: buf.build
     owner: envoyproxy
     repository: protoc-gen-validate
-    commit: 6607b10f00ed4a3d98f906807131c44a
+    commit: 71881f09a0c5420a9545a07987a86728
+    digest: shake256:d320bbf06653b1b2b45a1f95bfa82bf7b998221a777a042708c50d6f86a30d1a85b50c5704c597142d9b308280efe1295d39d76d1abea5f7046d3df4c8cc3cef
   - remote: buf.build
     owner: googleapis
     repository: googleapis
-    commit: 75b4300737fb4efca0831636be94e517
+    commit: 7e6f6e774e29406da95bd61cdcdbc8bc
+    digest: shake256:fe43dd2265ea0c07d76bd925eeba612667cf4c948d2ce53d6e367e1b4b3cb5fa69a51e6acb1a6a50d32f894f054a35e6c0406f6808a483f2752e10c866ffbf73
   - remote: buf.build
     owner: kratos
     repository: apis
     commit: c2de25f14fa445a79a054214f31d17a8
+    digest: shake256:91c024935d46f7966667c29e4fc933435959f93c3f0e675e1227c99db09905d44f8ec275b770da7659df5a6b18f4710da157b6d8ad760a4a95f60365b231e637

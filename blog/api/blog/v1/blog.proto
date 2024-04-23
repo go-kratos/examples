@@ -6,6 +6,7 @@ option go_package = "github.com/go-kratos/examples/blog/api/blog/v1;v1";
 
 import "google/api/annotations.proto";
 import "validate/validate.proto";
+import "buf/validate/validate.proto"; // buf生态validate
 
 service BlogService {
     rpc CreateArticle (CreateArticleRequest) returns (CreateArticleReply) {
@@ -45,7 +46,12 @@ message Article {
 }
 
 message CreateArticleRequest {
-    string title = 1 [(validate.rules).string = {min_len: 5, max_len: 50}]; // the title of string must be between 5 and 50 character
+    // doc: https://github.com/bufbuild/protovalidate
+    string title = 1 [json_name = "title", (buf.validate.field).cel = {
+            id: "CreateArticleRequest.title",
+            message: "the title of string must be between 5 and 50 character",
+            expression: "size(this) > 5 && size(this) <= 50",
+        }]; // the title of string must be between 5 and 50 character
     string content = 2;
 }
 
