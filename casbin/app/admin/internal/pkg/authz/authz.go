@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+
 	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
 	"github.com/go-kratos/kratos/v2/transport"
 	jwtV4 "github.com/golang-jwt/jwt/v4"
@@ -18,6 +19,7 @@ type SecurityUser struct {
 	Path        string
 	Method      string
 	AuthorityId string
+	Domain      string
 }
 
 func NewSecurityUser() authzM.SecurityUser {
@@ -51,6 +53,10 @@ func (su *SecurityUser) GetObject() string {
 
 func (su *SecurityUser) GetAction() string {
 	return su.Method
+}
+
+func (su *SecurityUser) GetDomain() string {
+	return su.Domain
 }
 
 func (su *SecurityUser) CreateAccessJwtToken(secretKey []byte) string {
