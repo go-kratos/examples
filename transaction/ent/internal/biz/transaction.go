@@ -34,16 +34,17 @@ func (u *UserUsecase) CreateUser(ctx context.Context, m *User) (int, error) {
 		err error
 		id  int
 	)
-	if e := u.tm.InTx(ctx, func(ctx context.Context) error {
+	err = u.tm.InTx(ctx, func(ctx context.Context) error {
 		id, err = u.userRepo.CreateUser(ctx, m)
 		if err != nil {
 			return err
 		}
-		if _, e := u.cardRepo.CreateCard(ctx, id); err != nil {
-			return e
+		if _, err := u.cardRepo.CreateCard(ctx, id); err != nil {
+			return err
 		}
 		return nil
-	}); e != nil {
+	})
+	if err != nil {
 		return 0, err
 	}
 	return id, nil
