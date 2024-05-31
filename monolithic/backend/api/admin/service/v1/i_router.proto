@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package admin.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+// 网站后台动态路由服务
+service RouterService {
+  // 查询路由列表
+  rpc ListRoute (google.protobuf.Empty) returns (ListRouteResponse) {
+    option (google.api.http) = {
+      get: "/admin/v1/routes"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 查询权限码列表
+  rpc ListPermissionCode (google.protobuf.Empty) returns (ListPermissionCodeResponse) {
+    option (google.api.http) = {
+      get: "/admin/v1/perm-codes"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+}
+
+// 路由元数据
+message RouteMeta {
+  optional int32 order_no = 1 [json_name = "orderNo"];
+  optional string title = 2 [json_name = "title"];
+  optional int32 dynamicLevel = 3 [json_name = "dynamicLevel"];
+  optional string realPath = 4 [json_name = "realPath"];
+  optional string icon = 5 [json_name = "icon"];
+  optional string frameSrc = 6 [json_name = "frameSrc"];
+  optional string transitionName = 7 [json_name = "transitionName"];
+  optional bool affix = 8 [json_name = "affix"];
+  optional bool carryParam = 9 [json_name = "carryParam"];
+  optional bool single = 10 [json_name = "single"];
+  optional bool ignoreAuth = 11 [json_name = "ignoreAuth"];
+  optional bool ignoreKeepAlive = 12 [json_name = "ignoreKeepAlive"];
+  optional bool ignoreRoute = 13 [json_name = "ignoreRoute"];
+  optional bool hideBreadcrumb = 14 [json_name = "hideBreadcrumb"];
+  optional bool hideChildrenInMenu = 15 [json_name = "hideChildrenInMenu"];
+  optional bool hideTab = 16 [json_name = "hideTab"];
+  optional bool hideMenu = 17 [json_name = "hideMenu"];
+  optional bool isLink = 18 [json_name = "isLink"];
+  optional bool hidePathForChildren = 19 [json_name = "hidePathForChildren"];
+  optional string currentActiveMenu = 20 [json_name = "currentActiveMenu"];
+}
+
+// 路由项
+message RouteItem {
+  optional string name = 1 [json_name = "name"];
+  optional string alias = 2 [json_name = "alias"];
+  optional string path = 3 [json_name = "path"];
+  optional string component = 4 [json_name = "component"];
+  optional string redirect = 5 [json_name = "redirect"];
+  optional bool caseSensitive = 6 [json_name = "caseSensitive"];
+  optional RouteMeta meta = 7 [json_name = "meta"];
+  repeated RouteItem children = 8 [json_name = "children"];
+}
+
+// 查询路由列表 - 回应
+message ListRouteResponse {
+  repeated RouteItem items = 1;
+}
+
+// 查询权限码列表 - 回应
+message ListPermissionCodeResponse {
+  repeated string codes = 1;
+}

@@ -1,0 +1,50 @@
+# 配置protoc生成规则
+version: v1
+
+managed:
+  enabled: true
+  optimize_for: SPEED
+
+  go_package_prefix:
+    default: kratos-monolithic-demo/gen/api/go
+    except:
+      - 'buf.build/googleapis/googleapis'
+      - 'buf.build/envoyproxy/protoc-gen-validate'
+      - 'buf.build/kratos/apis'
+      - 'buf.build/gnostic/gnostic'
+      - 'buf.build/gogo/protobuf'
+      - 'buf.build/tx7do/pagination'
+
+plugins:
+  # 使用go插件生成go代码
+  #- plugin: buf.build/protocolbuffers/go
+  - name: go
+    out: gen/api/go
+    opt: paths=source_relative # 使用相对路径
+
+  # 使用go-grpc插件生成gRPC服务代码
+  #- plugin: buf.build/grpc/go
+  - name: go-grpc
+    out: gen/api/go
+    opt:
+      - paths=source_relative # 使用相对路径
+
+  # generate rest service code
+  - name: go-http
+    out: gen/api/go
+    opt:
+      - paths=source_relative # 使用相对路径
+
+  # generate kratos errors code
+  - name: go-errors
+    out: gen/api/go
+    opt:
+      - paths=source_relative # 使用相对路径
+
+  # generate message validator code
+  #- plugin: buf.build/bufbuild/validate-go
+  - name: validate
+    out: gen/api/go
+    opt:
+      - paths=source_relative # 使用相对路径
+      - lang=go

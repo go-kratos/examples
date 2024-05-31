@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Middleware {
+  // JWT校验
+  message Auth {
+    string method = 1; // JWT签名的算法，支持算法：HS256
+    string key = 2; // JWT 秘钥
+  }
+
+  // 限流器
+  message RateLimiter {
+    string name = 1; // 限流器名字，支持：bbr。
+  }
+
+  // 性能指标
+  message Metrics {
+    bool histogram = 1; // 直方图
+    bool counter = 2; // 计数器
+    bool gauge = 3; // 仪表盘
+    bool summary = 4; // 摘要
+  }
+
+  bool enable_logging = 1; // 日志开关
+  bool enable_recovery = 2; // 异常恢复
+  bool enable_tracing = 3; // 链路追踪开关
+  bool enable_validate = 4; // 参数校验开关
+  bool enable_circuit_breaker = 5; // 熔断器
+
+  RateLimiter limiter = 6;
+  Metrics metrics = 7;
+  Auth auth = 8;
+}

@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pagination;
+option go_package = "kratos-gorm-example/gen/api/go/common/pagination;pagination";
+
+import "google/protobuf/any.proto";
+
+// 排序类型
+enum SortOrder {
+  // 不排序
+  UNSORTED = 0;
+  // 升序
+  ASCENDING = 1;
+  // 降序
+  DESCENDING = 2;
+}
+
+// 分页通用请求
+message PagingRequest {
+  // 当前页
+  optional int32 page = 1;
+
+  // 每一页的行数
+  optional int32 pageSize = 2 [json_name = "pageSize"];
+
+  // 查询参数
+  map<string, string> query = 3;
+
+  // 排序
+  map<string, string> orderBy = 4 [json_name = "orderBy"];
+
+  // 是否不分页
+  optional bool nopaging = 5;
+}
+
+// 分页通用结果
+message PagingResponse {
+  // 总数
+  int32 total = 1;
+  // 分页数据
+  repeated google.protobuf.Any items = 2;
+}

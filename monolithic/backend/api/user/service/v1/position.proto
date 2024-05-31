@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package user.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "pagination/v1/pagination.proto";
+
+// 职位服务
+service PositionService {
+  // 查询职位列表
+  rpc ListPosition (pagination.PagingRequest) returns (ListPositionResponse) {}
+
+  // 查询职位详情
+  rpc GetPosition (GetPositionRequest) returns (Position) {}
+
+  // 创建职位
+  rpc CreatePosition (CreatePositionRequest) returns (google.protobuf.Empty) {}
+
+  // 更新职位
+  rpc UpdatePosition (UpdatePositionRequest) returns (google.protobuf.Empty) {}
+
+  // 删除职位
+  rpc DeletePosition (DeletePositionRequest) returns (google.protobuf.Empty) {}
+}
+
+// 职位
+message Position {
+  uint32 id = 1;
+  optional string name = 2;
+  optional uint32 parentId = 3;
+  optional int32 orderNo = 4;
+  optional string code = 5;
+  optional string status = 6 [(gnostic.openapi.v3.property) = {
+    description: "状态"
+    default: { string: "ON" }
+    enum: [{yaml: "ON"}, {yaml: "OFF"}]
+  }];
+  optional string remark = 7;
+
+  optional string createTime = 20;// 创建时间
+  optional string updateTime = 21;// 更新时间
+  optional string deleteTime = 22;// 删除时间
+}
+
+// 获取职位列表 - 答复
+message ListPositionResponse {
+  repeated Position items = 1;
+  int32 total = 2;
+}
+
+// 获取职位数据 - 请求
+message GetPositionRequest {
+  uint32 id = 1;
+}
+
+// 创建职位 - 请求
+message CreatePositionRequest {
+  Position position = 1;
+  optional uint32 operatorId = 2 [json_name = "operatorId"];
+}
+
+// 更新职位 - 请求
+message UpdatePositionRequest {
+  Position position = 1;
+  optional uint32 operatorId = 2 [json_name = "operatorId"];
+}
+
+// 删除职位 - 请求
+message DeletePositionRequest {
+  uint32 id = 1;
+  optional uint32 operatorId = 2 [json_name = "operatorId"];
+}
