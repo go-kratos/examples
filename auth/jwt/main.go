@@ -9,7 +9,7 @@ import (
 	"github.com/go-kratos/kratos/v2/middleware/auth/jwt"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
-	jwtv4 "github.com/golang-jwt/jwt/v4"
+	jwtv5 "github.com/golang-jwt/jwt/v5"
 )
 
 type server struct {
@@ -27,7 +27,7 @@ func main() {
 	httpSrv := http.NewServer(
 		http.Address(":8000"),
 		http.Middleware(
-			jwt.Server(func(token *jwtv4.Token) (interface{}, error) {
+			jwt.Server(func(token *jwtv5.Token) (interface{}, error) {
 				return []byte(testKey), nil
 			}),
 		),
@@ -35,7 +35,7 @@ func main() {
 	grpcSrv := grpc.NewServer(
 		grpc.Address(":9000"),
 		grpc.Middleware(
-			jwt.Server(func(token *jwtv4.Token) (interface{}, error) {
+			jwt.Server(func(token *jwtv5.Token) (interface{}, error) {
 				return []byte(testKey), nil
 			}),
 		),
@@ -45,7 +45,7 @@ func main() {
 		context.Background(),
 		grpc.WithEndpoint("dns:///127.0.0.1:9001"),
 		grpc.WithMiddleware(
-			jwt.Client(func(token *jwtv4.Token) (interface{}, error) {
+			jwt.Client(func(token *jwtv5.Token) (interface{}, error) {
 				return []byte(serviceTestKey), nil
 			}),
 		),
