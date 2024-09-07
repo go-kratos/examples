@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+import "common/conf/middleware.proto";
+
+// 客户端
+message Client {
+  // REST
+  message REST {
+    google.protobuf.Duration timeout = 1; // 超时时间
+    Middleware middleware = 2;
+  }
+
+  // gPRC
+  message GRPC {
+    google.protobuf.Duration timeout = 1; // 超时时间
+    Middleware middleware = 2;
+  }
+
+  REST rest = 1;  // REST服务
+  GRPC grpc = 2;  // gRPC服务
+}

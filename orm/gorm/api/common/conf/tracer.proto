@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+// 链路追踪
+message Tracer {
+  string batcher = 1; // jaeger或者zipkin
+  string endpoint = 2;  // 端口
+  double sampler = 3; // 采样率，默认：1.0
+  string env = 4; // 运行环境：dev、debug、product
+}

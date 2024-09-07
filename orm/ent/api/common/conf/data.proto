@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-ent-example/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+// 数据
+message Data {
+  // 数据库
+  message Database {
+    string driver = 1;  // 驱动名：mysql、postgresql、mongodb、sqlite……
+    string source = 2;  // 数据源（DSN字符串）
+    bool migrate = 3; // 数据迁移开关
+    int32 max_idle_connections = 4; // 连接池最大空闲连接数
+    int32 max_open_connections = 5; // 连接池最大打开连接数
+    google.protobuf.Duration connection_max_lifetime = 6; // 连接可重用的最大时间长度
+  }
+
+  // redis
+  message Redis {
+    string network = 1; // 网络
+    string addr = 2;  // 服务端地址
+    string password = 3;  // 密码
+    int32 db = 4; // 数据库索引
+    google.protobuf.Duration dial_timeout = 5;  // 连接超时时间
+    google.protobuf.Duration read_timeout = 6;  // 读取超时时间
+    google.protobuf.Duration write_timeout = 7; // 写入超时时间
+  }
+
+  Database database = 1;  // 数据库
+  Redis redis = 2;  // Redis
+}
