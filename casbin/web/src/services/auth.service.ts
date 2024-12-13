@@ -2,40 +2,36 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8800/api/v1/";
 
-class AuthService {
-  login(username: string, password: string) {
-    return axios
-      .post(API_URL + "login", {
-        user_name: username,
-        password
-      })
-      .then(response => {
-        if (response.data.token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-        }
+export const register = (username: string, email: string, password: string) => {
+  return axios.post(API_URL + "register", {
+    username,
+    email,
+    password,
+  });
+};
 
-        return response.data;
-      });
-  }
+export const login = (username: string, password: string) => {
+  return axios
+    .post(API_URL + "login", {
+      user_name: username,
+      password,
+    })
+    .then((response) => {
+      if (response.data.token) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
 
-  logout() {
-    localStorage.removeItem("user");
-  }
-
-  register(username: string, email: string, password: string) {
-    return axios.post(API_URL + "register", {
-      username,
-      email,
-      password
+      return response.data;
     });
-  }
+};
 
-  getCurrentUser() {
-    const userStr = localStorage.getItem("user");
-    if (userStr) return JSON.parse(userStr);
+export const logout = () => {
+  localStorage.removeItem("user");
+};
 
-    return null;
-  }
-}
+export const getCurrentUser = () => {
+  const userStr = localStorage.getItem("user");
+  if (userStr) return JSON.parse(userStr);
 
-export default new AuthService();
+  return null;
+};
