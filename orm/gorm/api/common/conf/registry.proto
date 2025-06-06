@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+// 注册发现中心
+message Registry {
+  // Consul
+  message Consul {
+    string scheme = 1;  // 网络样式
+    string address = 2; // 服务端地址
+    bool health_check = 3;  // 健康检查
+  }
+
+  // Etcd
+  message Etcd {
+    repeated string endpoints = 1;
+  }
+
+  // ZooKeeper
+  message ZooKeeper {
+    repeated string endpoints = 1;
+    google.protobuf.Duration timeout = 2;
+  }
+
+  // Nacos
+  message Nacos {
+    string address = 1; // 服务端地址
+    uint64 port = 2; // 服务端端口
+    string namespace_id = 3; //
+    string log_level = 4; // 日志等级
+    string cache_dir = 5; // 缓存目录
+    string log_dir = 6; // 日志目录
+    int32 update_thread_num = 7; // 更新服务的线程数
+    google.protobuf.Duration timeout = 8; // http请求超时时间，单位: 毫秒
+    google.protobuf.Duration beat_interval = 9; // 心跳间隔时间，单位: 毫秒
+    bool not_load_cache_at_start = 10; // 在启动时不读取本地缓存数据，true: 不读取，false: 读取
+    bool update_cache_when_empty = 11; // 当服务列表为空时是否更新本地缓存，true: 更新,false: 不更新
+  }
+
+  // Kubernetes
+  message Kubernetes {
+
+  }
+
+  // Eureka
+  message Eureka {
+    repeated string endpoints = 1;
+    google.protobuf.Duration heartbeat_interval = 2;
+    google.protobuf.Duration refresh_interval = 3;
+    string path = 4;
+  }
+
+  // Polaris
+  message Polaris {
+    string address = 1; // 服务端地址
+    int32 port = 2; // 服务端端口
+    int32 instance_count = 3;
+    string namespace = 4;
+    string service = 5;
+    string token = 6;
+  }
+
+  // Servicecomb
+  message Servicecomb {
+    repeated string endpoints = 1;
+  }
+
+  string type = 1;
+
+  Consul consul = 2;  // Consul
+  Etcd etcd = 3;  // Etcd
+  ZooKeeper zookeeper = 4;  // ZooKeeper
+  Nacos nacos = 5;  // Nacos
+  Kubernetes kubernetes = 6;  // Kubernetes
+  Eureka eureka = 7;  // Eureka
+  Polaris polaris = 8;  // Polaris
+  Servicecomb servicecomb = 9;  // Servicecomb
+}

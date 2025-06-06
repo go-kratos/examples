@@ -1,0 +1,37 @@
+# 配置protoc生成规则
+version: v1
+managed:
+  enabled: false
+plugins:
+  # generate go struct code
+  #- plugin: buf.build/protocolbuffers/go
+  - name: go
+    out: gen/api/go
+    opt: paths=source_relative
+
+  # generate grpc service code
+  #- plugin: buf.build/grpc/go
+  - name: go-grpc
+    out: gen/api/go
+    opt:
+      - paths=source_relative
+
+  # generate rest service code
+  - name: go-http
+    out: gen/api/go
+    opt:
+      - paths=source_relative
+
+  # generate kratos errors code
+  - name: go-errors
+    out: gen/api/go
+    opt:
+      - paths=source_relative
+
+  # generate message validator code
+  #- plugin: buf.build/bufbuild/validate-go
+  - name: validate
+    out: gen/api/go
+    opt:
+      - paths=source_relative
+      - lang=go

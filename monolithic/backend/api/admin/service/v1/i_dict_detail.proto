@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package admin.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "pagination/v1/pagination.proto";
+import "system/service/v1/dict_detail.proto";
+
+// 数据字典详情服务
+service DictDetailService {
+  // 查询字典详情列表
+  rpc ListDictDetail (pagination.PagingRequest) returns (system.service.v1.ListDictDetailResponse) {
+    option (google.api.http) = {
+      get: "/admin/v1/dict:details"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 查询字典详情
+  rpc GetDictDetail (system.service.v1.GetDictDetailRequest) returns (system.service.v1.DictDetail) {
+    option (google.api.http) = {
+      get: "/admin/v1/dict:details/{id}"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 创建字典详情
+  rpc CreateDictDetail (system.service.v1.CreateDictDetailRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/admin/v1/dict:details"
+      body: "*"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 更新字典详情
+  rpc UpdateDictDetail (system.service.v1.UpdateDictDetailRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/admin/v1/dict:details/{detail.id}"
+      body: "detail"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 删除字典详情
+  rpc DeleteDictDetail (system.service.v1.DeleteDictDetailRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/admin/v1/dict:details/{id}"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+}

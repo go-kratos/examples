@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package pagination;
+option go_package = "kratos-ent-example/gen/api/go/common/pagination;pagination";
+
+import "google/protobuf/any.proto";
+import "gnostic/openapi/v3/annotations.proto";
+
+// 排序类型
+enum SortOrder {
+  // 不排序
+  UNSORTED = 0;
+  // 升序
+  ASCENDING = 1;
+  // 降序
+  DESCENDING = 2;
+}
+
+// 分页通用请求
+message PagingRequest {
+  // 当前页码
+  optional int32 page = 1 [
+    (gnostic.openapi.v3.property) = {
+      description: "当前页码",
+      default: {number: 1}
+    }
+  ];
+
+  // 每页的行数
+  optional int32 pageSize = 2 [
+    json_name = "pageSize",
+    (gnostic.openapi.v3.property) = {
+      description: "每一页的行数",
+      default: {number: 10}
+    }
+  ];
+
+  //AND过滤条件
+  optional string query = 3 [
+    json_name = "query",
+    (gnostic.openapi.v3.property) = {
+      description: "AND过滤条件",
+      example: {yaml: "{\"key1\":\"val1\",\"key2\":\"val2\"}"}
+    }
+  ];
+
+  // OR过滤条件
+  optional string orQuery = 4 [
+    json_name = "or",
+    (gnostic.openapi.v3.property) = {
+      description: "OR过滤条件",
+      example: {yaml: "{\"key1\":\"val1\",\"key2\":\"val2\"}"}
+    }
+  ];
+
+  // 排序条件
+  repeated string orderBy = 5 [
+    json_name = "orderBy",
+    (gnostic.openapi.v3.property) = {
+      description: "排序条件，字段名前加'-'为降序，否则为升序。"
+      example: {yaml: "{\"val1\", \"-val2\"}"}
+    }
+  ];
+
+  // 是否不分页
+  optional bool noPaging = 6 [
+    json_name = "nopaging",
+    (gnostic.openapi.v3.property) = {description: "是否不分页"}
+  ];
+}
+
+// 分页通用结果
+message PagingResponse {
+  // 总数
+  int32 total = 1;
+  // 分页数据
+  repeated google.protobuf.Any items = 2;
+}

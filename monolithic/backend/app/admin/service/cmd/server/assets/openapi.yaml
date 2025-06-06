@@ -1,0 +1,1825 @@
+# Generated with protoc-gen-openapi
+# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
+
+openapi: 3.0.3
+info:
+    title: Kratos巨石应用实践API
+    description: Kratos巨石应用实践API
+    contact:
+        name: tx7do
+        url: https://github.com/tx7do/kratos-monolithic-demo
+        email: yanglinbo@gmail.com
+    license:
+        name: MIT License
+        url: https://github.com/tx7do/kratos-monolithic-demo/blob/master/LICENSE
+    version: "1.0"
+paths:
+    /admin/v1/dict:details:
+        get:
+            tags:
+                - DictDetailService
+            description: 查询字典详情列表
+            operationId: DictDetailService_ListDictDetail
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListDictDetailResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - DictDetailService
+            description: 创建字典详情
+            operationId: DictDetailService_CreateDictDetail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateDictDetailRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/dict:details/{detail.id}:
+        put:
+            tags:
+                - DictDetailService
+            description: 更新字典详情
+            operationId: DictDetailService_UpdateDictDetail
+            parameters:
+                - name: detail.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DictDetail'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/dict:details/{id}:
+        get:
+            tags:
+                - DictDetailService
+            description: 查询字典详情
+            operationId: DictDetailService_GetDictDetail
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: code
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DictDetail'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - DictDetailService
+            description: 删除字典详情
+            operationId: DictDetailService_DeleteDictDetail
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/dicts:
+        get:
+            tags:
+                - DictService
+            description: 查询字典列表
+            operationId: DictService_ListDict
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListDictResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - DictService
+            description: 创建字典
+            operationId: DictService_CreateDict
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateDictRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/dicts/{dict.id}:
+        put:
+            tags:
+                - DictService
+            description: 更新字典
+            operationId: DictService_UpdateDict
+            parameters:
+                - name: dict.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Dict'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/dicts/{id}:
+        get:
+            tags:
+                - DictService
+            description: 查询字典
+            operationId: DictService_GetDict
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: name
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Dict'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - DictService
+            description: 删除字典
+            operationId: DictService_DeleteDict
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/login:
+        post:
+            tags:
+                - AuthenticationService
+            description: 登陆
+            operationId: AuthenticationService_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LoginResponse'
+    /admin/v1/logout:
+        post:
+            tags:
+                - AuthenticationService
+            description: 登出
+            operationId: AuthenticationService_Logout
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LogoutRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/me:
+        get:
+            tags:
+                - AuthenticationService
+            description: 后台获取已经登陆的用户的数据
+            operationId: AuthenticationService_GetMe
+            parameters:
+                - name: id
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/menus:
+        get:
+            tags:
+                - MenuService
+            description: 查询菜单列表
+            operationId: MenuService_ListMenu
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListMenuResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - MenuService
+            description: 创建菜单
+            operationId: MenuService_CreateMenu
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateMenuRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/menus/{id}:
+        get:
+            tags:
+                - MenuService
+            description: 查询菜单详情
+            operationId: MenuService_GetMenu
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Menu'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - MenuService
+            description: 删除菜单
+            operationId: MenuService_DeleteMenu
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: int32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/menus/{menu.id}:
+        put:
+            tags:
+                - MenuService
+            description: 更新菜单
+            operationId: MenuService_UpdateMenu
+            parameters:
+                - name: menu.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Menu'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/orgs:
+        get:
+            tags:
+                - OrganizationService
+            description: 查询部门列表
+            operationId: OrganizationService_ListOrganization
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListOrganizationResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - OrganizationService
+            description: 创建部门
+            operationId: OrganizationService_CreateOrganization
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateOrganizationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/orgs/{id}:
+        get:
+            tags:
+                - OrganizationService
+            description: 查询部门详情
+            operationId: OrganizationService_GetOrganization
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Organization'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - OrganizationService
+            description: 删除部门
+            operationId: OrganizationService_DeleteOrganization
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/orgs/{org.id}:
+        put:
+            tags:
+                - OrganizationService
+            description: 更新部门
+            operationId: OrganizationService_UpdateOrganization
+            parameters:
+                - name: org.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Organization'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/perm-codes:
+        get:
+            tags:
+                - RouterService
+            description: 查询权限码列表
+            operationId: RouterService_ListPermissionCode
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListPermissionCodeResponse'
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/positions:
+        get:
+            tags:
+                - PositionService
+            description: 查询职位列表
+            operationId: PositionService_ListPosition
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListPositionResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - PositionService
+            description: 创建职位
+            operationId: PositionService_CreatePosition
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreatePositionRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/positions/{id}:
+        get:
+            tags:
+                - PositionService
+            description: 查询职位详情
+            operationId: PositionService_GetPosition
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Position'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - PositionService
+            description: 删除职位
+            operationId: PositionService_DeletePosition
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/positions/{position.id}:
+        put:
+            tags:
+                - PositionService
+            description: 更新职位
+            operationId: PositionService_UpdatePosition
+            parameters:
+                - name: position.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Position'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/refresh_token:
+        post:
+            tags:
+                - AuthenticationService
+            description: 刷新认证令牌
+            operationId: AuthenticationService_RefreshToken
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/RefreshTokenRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LoginResponse'
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/roles:
+        get:
+            tags:
+                - RoleService
+            description: 查询角色列表
+            operationId: RoleService_ListRole
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListRoleResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - RoleService
+            description: 创建角色
+            operationId: RoleService_CreateRole
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/roles/{id}:
+        get:
+            tags:
+                - RoleService
+            description: 查询角色详情
+            operationId: RoleService_GetRole
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Role'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - RoleService
+            description: 删除角色
+            operationId: RoleService_DeleteRole
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/roles/{role.id}:
+        put:
+            tags:
+                - RoleService
+            description: 更新角色
+            operationId: RoleService_UpdateRole
+            parameters:
+                - name: role.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Role'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/routes:
+        get:
+            tags:
+                - RouterService
+            description: 查询路由列表
+            operationId: RouterService_ListRoute
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListRouteResponse'
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/users:
+        get:
+            tags:
+                - UserService
+            description: 获取用户列表
+            operationId: UserService_ListUser
+            parameters:
+                - name: page
+                  in: query
+                  description: 当前页码
+                  schema:
+                    type: integer
+                    format: int32
+                - name: pageSize
+                  in: query
+                  description: 每页的行数
+                  schema:
+                    type: integer
+                    format: int32
+                - name: query
+                  in: query
+                  description: 与过滤参数
+                  schema:
+                    type: string
+                - name: or
+                  in: query
+                  description: 或过滤参数
+                  schema:
+                    type: string
+                - name: orderBy
+                  in: query
+                  description: 排序条件
+                  schema:
+                    type: array
+                    items:
+                        type: string
+                - name: nopaging
+                  in: query
+                  description: 是否不分页
+                  schema:
+                    type: boolean
+                - name: fieldMask
+                  in: query
+                  description: 字段掩码
+                  schema:
+                    type: string
+                    format: field-mask
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListUserResponse'
+            security:
+                - OAuth2PasswordBearer: []
+        post:
+            tags:
+                - UserService
+            description: 创建用户
+            operationId: UserService_CreateUser
+            parameters:
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: password
+                  in: query
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/users/{id}:
+        get:
+            tags:
+                - UserService
+            description: 获取用户数据
+            operationId: UserService_GetUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/User'
+            security:
+                - OAuth2PasswordBearer: []
+        delete:
+            tags:
+                - UserService
+            description: 删除用户
+            operationId: UserService_DeleteUser
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+    /admin/v1/users/{user.id}:
+        put:
+            tags:
+                - UserService
+            description: 更新用户
+            operationId: UserService_UpdateUser
+            parameters:
+                - name: user.id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+                - name: operatorId
+                  in: query
+                  schema:
+                    type: integer
+                    format: uint32
+                - name: password
+                  in: query
+                  schema:
+                    type: string
+                - name: updateMask
+                  in: query
+                  schema:
+                    type: string
+                    format: field-mask
+                - name: allowMissing
+                  in: query
+                  schema:
+                    type: boolean
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+            security:
+                - OAuth2PasswordBearer: []
+components:
+    schemas:
+        CreateDictDetailRequest:
+            type: object
+            properties:
+                detail:
+                    $ref: '#/components/schemas/DictDetail'
+                operatorId:
+                    type: integer
+                    format: uint32
+            description: 创建字典详情 - 请求
+        CreateDictRequest:
+            type: object
+            properties:
+                dict:
+                    $ref: '#/components/schemas/Dict'
+                operatorId:
+                    type: integer
+                    format: uint32
+            description: 创建字典 - 请求
+        CreateMenuRequest:
+            type: object
+            properties:
+                menu:
+                    $ref: '#/components/schemas/Menu'
+                operatorId:
+                    type: integer
+                    format: uint32
+            description: 创建菜单 - 请求
+        CreateOrganizationRequest:
+            type: object
+            properties:
+                operatorId:
+                    type: integer
+                    format: uint32
+                org:
+                    $ref: '#/components/schemas/Organization'
+            description: 创建部门 - 请求
+        CreatePositionRequest:
+            type: object
+            properties:
+                position:
+                    $ref: '#/components/schemas/Position'
+                operatorId:
+                    type: integer
+                    format: uint32
+            description: 创建职位 - 请求
+        CreateRoleRequest:
+            type: object
+            properties:
+                role:
+                    $ref: '#/components/schemas/Role'
+                operatorId:
+                    type: integer
+                    format: uint32
+            description: 创建角色 - 请求
+        Dict:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: ID
+                    format: uint32
+                name:
+                    type: string
+                    description: 字典名称
+                description:
+                    type: string
+                    description: 描述
+                creatorId:
+                    type: integer
+                    description: 创建者ID
+                    format: uint32
+                creatorName:
+                    type: integer
+                    description: 创建者名字
+                    format: uint32
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 数据字典
+        DictDetail:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    description: 字典详情ID
+                    format: uint32
+                dictId:
+                    type: integer
+                    description: 字典ID
+                    format: uint32
+                orderNo:
+                    type: integer
+                    description: 排序号
+                    format: int32
+                label:
+                    type: string
+                    description: 字典标签
+                value:
+                    type: string
+                    description: 字典值
+                creatorId:
+                    type: integer
+                    description: 创建者ID
+                    format: uint32
+                creatorName:
+                    type: integer
+                    description: 创建者名字
+                    format: uint32
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 数据字典详情
+        KratosStatus:
+            type: object
+            properties:
+                code:
+                    type: number
+                    description: 错误码
+                    format: int32
+                message:
+                    type: string
+                    description: 错误消息
+                reason:
+                    type: string
+                    description: 错误原因
+                metadata:
+                    type: object
+                    description: 元数据
+            description: Kratos错误返回
+        ListDictDetailResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/DictDetail'
+                total:
+                    type: integer
+                    format: int32
+            description: 查询字典详情列表 - 答复
+        ListDictResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Dict'
+                total:
+                    type: integer
+                    format: int32
+            description: 查询字典列表 - 答复
+        ListMenuResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Menu'
+                total:
+                    type: integer
+                    format: int32
+            description: 查询菜单列表 - 回应
+        ListOrganizationResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Organization'
+                total:
+                    type: integer
+                    format: int32
+            description: 部门列表 - 答复
+        ListPermissionCodeResponse:
+            type: object
+            properties:
+                codes:
+                    type: array
+                    items:
+                        type: string
+            description: 查询权限码列表 - 回应
+        ListPositionResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Position'
+                total:
+                    type: integer
+                    format: int32
+            description: 获取职位列表 - 答复
+        ListRoleResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Role'
+                total:
+                    type: integer
+                    format: int32
+            description: 角色列表 - 答复
+        ListRouteResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RouteItem'
+            description: 查询路由列表 - 回应
+        ListUserResponse:
+            type: object
+            properties:
+                items:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/User'
+                total:
+                    type: integer
+                    format: int32
+            description: 获取用户列表 - 答复
+        LoginRequest:
+            required:
+                - username
+                - password
+                - grand_type
+            type: object
+            properties:
+                username:
+                    type: string
+                password:
+                    type: string
+                grand_type:
+                    type: string
+                    default: password
+                    description: 授权类型，此处的值固定为"password"，必选项。
+                scope:
+                    type: string
+            description: 用户后台登陆 - 请求
+        LoginResponse:
+            type: object
+            properties:
+                access_token:
+                    type: string
+                refresh_token:
+                    type: string
+                token_type:
+                    type: string
+                expires_in:
+                    type: string
+            description: 用户后台登陆 - 回应
+        LogoutRequest:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+            description: 用户后台登出 - 请求
+        Menu:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: int32
+                parentId:
+                    type: integer
+                    format: int32
+                orderNo:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                type:
+                    enum:
+                        - FOLDER
+                        - MENU
+                        - BUTTON
+                    type: string
+                    default: FOLDER
+                    description: 类型
+                    format: enum
+                status:
+                    enum:
+                        - ON
+                        - OFF
+                    type: string
+                    default: ON
+                    description: 状态
+                path:
+                    type: string
+                title:
+                    type: string
+                component:
+                    type: string
+                icon:
+                    type: string
+                permissions:
+                    type: array
+                    items:
+                        type: string
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Menu'
+                keepAlive:
+                    type: boolean
+                show:
+                    type: boolean
+                isExt:
+                    type: boolean
+                extUrl:
+                    type: string
+                hideBreadcrumb:
+                    type: boolean
+                hideTab:
+                    type: boolean
+                hideMenu:
+                    type: boolean
+                hideChildrenInMenu:
+                    type: boolean
+                hidePathForChildren:
+                    type: boolean
+                currentActiveMenu:
+                    type: string
+                redirect:
+                    type: string
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 菜单
+        Organization:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                parentId:
+                    type: integer
+                    format: uint32
+                orderNo:
+                    type: integer
+                    format: int32
+                status:
+                    enum:
+                        - ON
+                        - OFF
+                    type: string
+                    default: ON
+                    description: 状态
+                remark:
+                    type: string
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/Organization'
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 部门
+        Position:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                parentId:
+                    type: integer
+                    format: uint32
+                orderNo:
+                    type: integer
+                    format: int32
+                code:
+                    type: string
+                status:
+                    enum:
+                        - ON
+                        - OFF
+                    type: string
+                    default: ON
+                    description: 状态
+                remark:
+                    type: string
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 职位
+        RefreshTokenRequest:
+            required:
+                - refresh_token
+                - grand_type
+            type: object
+            properties:
+                refresh_token:
+                    type: string
+                grand_type:
+                    type: string
+                    default: password
+                    description: 授权类型，此处的值固定为"password"，必选项。
+                scope:
+                    type: string
+            description: 用户刷新令牌 - 请求
+        Role:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                name:
+                    type: string
+                parentId:
+                    type: integer
+                    format: uint32
+                orderNo:
+                    type: integer
+                    format: int32
+                code:
+                    type: string
+                status:
+                    enum:
+                        - ON
+                        - OFF
+                    type: string
+                    default: ON
+                    description: 状态
+                remark:
+                    type: string
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 角色
+        RouteItem:
+            type: object
+            properties:
+                name:
+                    type: string
+                alias:
+                    type: string
+                path:
+                    type: string
+                component:
+                    type: string
+                redirect:
+                    type: string
+                caseSensitive:
+                    type: boolean
+                meta:
+                    $ref: '#/components/schemas/RouteMeta'
+                children:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/RouteItem'
+            description: 路由项
+        RouteMeta:
+            type: object
+            properties:
+                orderNo:
+                    type: integer
+                    format: int32
+                title:
+                    type: string
+                dynamicLevel:
+                    type: integer
+                    format: int32
+                realPath:
+                    type: string
+                icon:
+                    type: string
+                frameSrc:
+                    type: string
+                transitionName:
+                    type: string
+                affix:
+                    type: boolean
+                carryParam:
+                    type: boolean
+                single:
+                    type: boolean
+                ignoreAuth:
+                    type: boolean
+                ignoreKeepAlive:
+                    type: boolean
+                ignoreRoute:
+                    type: boolean
+                hideBreadcrumb:
+                    type: boolean
+                hideChildrenInMenu:
+                    type: boolean
+                hideTab:
+                    type: boolean
+                hideMenu:
+                    type: boolean
+                isLink:
+                    type: boolean
+                hidePathForChildren:
+                    type: boolean
+                currentActiveMenu:
+                    type: string
+            description: 路由元数据
+        User:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    format: uint32
+                roleId:
+                    type: integer
+                    description: 角色ID
+                    format: uint32
+                workId:
+                    type: integer
+                    description: 工号
+                    format: uint32
+                orgId:
+                    type: integer
+                    description: 部门ID
+                    format: uint32
+                positionId:
+                    type: integer
+                    description: 岗位ID
+                    format: uint32
+                creatorId:
+                    type: integer
+                    description: 创建者ID
+                    format: uint32
+                userName:
+                    type: string
+                    description: 登录名
+                nickName:
+                    type: string
+                    description: 昵称
+                realName:
+                    type: string
+                    description: 真实姓名
+                avatar:
+                    type: string
+                    description: 头像
+                email:
+                    type: string
+                    description: 邮箱
+                phone:
+                    type: string
+                    description: 手机号
+                gender:
+                    type: string
+                    description: 性别
+                address:
+                    type: string
+                    description: 住址
+                description:
+                    type: string
+                    description: 个人描述
+                lastLoginTime:
+                    type: string
+                    description: 最后登录时间
+                lastLoginIp:
+                    type: string
+                    description: 最后登录IP
+                status:
+                    enum:
+                        - ON
+                        - OFF
+                    type: string
+                    default: ON
+                    description: 用户状态
+                authority:
+                    enum:
+                        - SYS_ADMIN
+                        - CUSTOMER_USER
+                        - GUEST_USER
+                        - REFRESH_TOKEN
+                    type: string
+                    default: CUSTOMER_USER
+                    description: 权限
+                    format: enum
+                createTime:
+                    type: string
+                updateTime:
+                    type: string
+                deleteTime:
+                    type: string
+            description: 用户
+    responses:
+        default:
+            description: default kratos response
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/KratosStatus'
+    securitySchemes:
+        OAuth2PasswordBearer:
+            type: oauth2
+            flows:
+                password:
+                    tokenUrl: /admin/v1/login
+                    refreshUrl: /admin/v1/refresh_token
+                    scopes: {}
+tags:
+    - name: AuthenticationService
+      description: 用户后台登陆认证服务
+    - name: DictDetailService
+      description: 数据字典详情服务
+    - name: DictService
+      description: 字典服务
+    - name: MenuService
+      description: 后台菜单服务
+    - name: OrganizationService
+      description: 部门管理服务
+    - name: PositionService
+      description: 职位服务
+    - name: RoleService
+      description: 角色服务
+    - name: RouterService
+      description: 网站后台动态路由服务
+    - name: UserService
+      description: 用户管理服务

@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package user.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/empty.proto";
+
+import "pagination/v1/pagination.proto";
+
+// 角色服务
+service RoleService {
+  // 查询角色列表
+  rpc ListRole (pagination.PagingRequest) returns (ListRoleResponse) {}
+
+  // 查询角色详情
+  rpc GetRole (GetRoleRequest) returns (Role) {}
+
+  // 创建角色
+  rpc CreateRole (CreateRoleRequest) returns (google.protobuf.Empty) {}
+
+  // 更新角色
+  rpc UpdateRole (UpdateRoleRequest) returns (google.protobuf.Empty) {}
+
+  // 删除角色
+  rpc DeleteRole (DeleteRoleRequest) returns (google.protobuf.Empty) {}
+}
+
+// 角色
+message Role {
+  uint32 id = 1;
+  optional string name = 2;
+  optional uint32 parentId = 3;
+  optional int32 orderNo = 4;
+  optional string code = 5;
+  optional string status = 6 [(gnostic.openapi.v3.property) = {
+    description: "状态"
+    default: { string: "ON" }
+    enum: [{yaml: "ON"}, {yaml: "OFF"}]
+  }];
+  optional string remark = 7;
+
+  optional string createTime = 20;// 创建时间
+  optional string updateTime = 21;// 更新时间
+  optional string deleteTime = 22;// 删除时间
+}
+
+// 角色列表 - 答复
+message ListRoleResponse {
+  repeated Role items = 1;
+  int32 total = 2;
+}
+
+// 角色数据 - 请求
+message GetRoleRequest {
+  uint32 id = 1;
+}
+
+// 创建角色 - 请求
+message CreateRoleRequest {
+  Role role = 1;
+  optional uint32 operatorId = 2 [json_name = "operatorId"];
+}
+
+// 更新角色 - 请求
+message UpdateRoleRequest {
+  Role role = 1;
+  optional uint32 operatorId = 2 [json_name = "operatorId"];
+}
+
+// 删除角色 - 请求
+message DeleteRoleRequest {
+  uint32 id = 1;
+  optional uint32 operatorId = 2 [json_name = "operatorId"];
+}

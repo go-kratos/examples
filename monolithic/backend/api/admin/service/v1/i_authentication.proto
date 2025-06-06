@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package admin.service.v1;
+
+import "gnostic/openapi/v3/annotations.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/api/field_behavior.proto";
+
+import "user/service/v1/user.proto";
+
+// 用户后台登陆认证服务
+service AuthenticationService {
+  // 登陆
+  rpc Login (LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/admin/v1/login"
+      body: "*"
+    };
+  }
+
+  // 登出
+  rpc Logout (LogoutRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/admin/v1/logout"
+      body: "*"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 刷新认证令牌
+  rpc RefreshToken (RefreshTokenRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/admin/v1/refresh_token"
+      body: "*"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+
+  // 后台获取已经登陆的用户的数据
+  rpc GetMe (GetMeRequest) returns (user.service.v1.User) {
+    option (google.api.http) = {
+      get: "/admin/v1/me"
+    };
+
+    option(gnostic.openapi.v3.operation) = {
+      security: [{additional_properties: [{name: "OAuth2PasswordBearer"; value: {}}]}]
+    };
+  }
+}
+
+// 用户后台登陆 - 请求
+message LoginRequest {
+  string username = 1 [
+    json_name = "username",
+    (google.api.field_behavior) = REQUIRED
+  ]; // 用户名，必选项。
+  string password = 2 [
+    json_name = "password",
+    (google.api.field_behavior) = REQUIRED
+  ]; // 用户的密码，必选项。
+  string grand_type = 3 [
+    json_name = "grand_type",
+    (google.api.field_behavior) = REQUIRED,
+    (gnostic.openapi.v3.property) = {
+      description: "授权类型，此处的值固定为\"password\"，必选项。",
+      default: {string: "password"}
+    }
+  ]; // 授权类型，此处的值固定为"password"，必选项。
+  optional string scope = 4 [
+    json_name = "scope",
+    (google.api.field_behavior) = OPTIONAL
+  ]; // 以空格分隔的范围列表。如果未提供，scope则授权任何范围，默认为空列表。
+}
+// 用户后台登陆 - 回应
+message LoginResponse {
+  string access_token = 1 [json_name = "access_token"]; // 访问令牌，必选项。
+  string refresh_token = 2 [json_name = "refresh_token"]; // 更新令牌，用来获取下一次的访问令牌，可选项。
+  string token_type = 3 [json_name = "token_type"]; // 令牌类型，该值大小写不敏感，必选项，可以是bearer类型或mac类型。
+  int64 expires_in = 4 [json_name = "expires_in"]; // 过期时间，单位为秒。如果省略该参数，必须其他方式设置过期时间。
+}
+
+// 用户后台登出 - 请求
+message LogoutRequest {
+  uint32 id = 1;
+}
+
+// 获取当前用户信息 - 请求
+message GetMeRequest {
+  uint32 id = 1;
+}
+
+// 用户刷新令牌 - 请求
+message RefreshTokenRequest {
+  string refresh_token = 1 [
+    json_name = "refresh_token",
+    (google.api.field_behavior) = REQUIRED
+  ]; // 更新令牌，用来获取下一次的访问令牌，必选项。
+  string grand_type = 2 [
+    json_name = "grand_type",
+    (google.api.field_behavior) = REQUIRED,
+    (gnostic.openapi.v3.property) = {
+      description: "授权类型，此处的值固定为\"password\"，必选项。",
+      default: {string: "password"}
+    }
+  ]; // 授权类型，此处的值固定为"password"，必选项。
+  optional string scope = 3 [
+    json_name = "scope",
+    (google.api.field_behavior) = OPTIONAL
+  ]; // 以空格分隔的范围列表。如果未提供，scope则授权任何范围，默认为空列表。
+}
+
+// 用户刷新令牌 - 回应
+message RefreshTokenResponse {
+  string refresh_token = 1 [json_name = "refresh_token"]; // 更新令牌，用来获取下一次的访问令牌，可选项。
+  string grand_type = 2 [json_name = "grand_type"]; // 授权类型，此处的值固定为"password"，必选项。
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+message OSS {
+  // MinIO
+  message MinIO {
+    string endpoint = 1;  // 对端端口
+    string access_key = 2;  // 访问密钥
+    string secret_key = 3;  // 密钥
+    string token = 4; // 令牌
+    bool use_ssl = 5; // 使用SSL
+    string upload_host = 6;  // 上传链接的主机名
+    string download_host = 7;  // 下载链接的主机名
+  }
+
+  MinIO minio = 1;
+}

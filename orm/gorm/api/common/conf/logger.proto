@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+// 日志
+message Logger {
+  // Zap
+  message Zap {
+    string filename = 1; //
+    string level = 2; //
+    int32 max_size = 3; //
+    int32 max_age = 4; //
+    int32 max_backups = 5; //
+  }
+
+  // logrus
+  message Logrus {
+    string level = 1; // 日志等级
+    string formatter = 2; // 输出格式：text, json.
+    string timestamp_format = 3; // 定义时间戳格式，例如："2006-01-02 15:04:05"
+    bool disable_colors = 4; // 不需要彩色日志
+    bool disable_timestamp = 5; // 不需要时间戳
+  }
+
+  // Fluent
+  message Fluent {
+    string endpoint = 1; // 公网接入地址
+  }
+
+  // 阿里云
+  message Aliyun {
+    string endpoint = 1; // 公网接入地址
+    string project = 2; //
+    string access_key = 3; // 访问密钥ID
+    string access_secret = 4; // 访问密钥
+  }
+
+  // 腾讯
+  message Tencent {
+    string endpoint = 1; // 公网接入地址
+    string topic_id = 2; //
+    string access_key = 3; // 访问密钥ID
+    string access_secret = 4; // 访问密钥
+  }
+
+  string type = 1;
+
+  Zap zap = 2;
+  Logrus logrus = 3;
+  Fluent fluent = 4;
+  Aliyun aliyun = 5;
+  Tencent tencent = 6;
+}

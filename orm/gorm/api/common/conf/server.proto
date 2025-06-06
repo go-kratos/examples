@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "kratos-gorm-example/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+import "common/conf/middleware.proto";
+
+// 服务器
+message Server {
+  // REST
+  message REST {
+    message CORS {
+      repeated string headers = 1;  //
+      repeated string methods = 2;  //
+      repeated string origins = 3;  //
+    }
+
+    string network = 1; // 网络
+    string addr = 2;  // 服务监听地址
+    google.protobuf.Duration timeout = 3; // 超时时间
+    CORS cors = 4;  // 服务监听地址
+    Middleware middleware = 5;  // 中间件
+  }
+
+  // gPRC
+  message GRPC {
+    string network = 1; // 网络
+    string addr = 2;  // 服务监听地址
+    google.protobuf.Duration timeout = 3; // 超时时间
+    Middleware middleware = 4;
+  }
+
+  // Websocket
+  message Websocket {
+    string network = 1; // 网络样式：http、https
+    string addr = 2;  // 服务监听地址
+    string path = 3;  // 路径
+    string codec = 4;  // 编解码器
+    google.protobuf.Duration timeout = 5; // 超时时间
+  }
+
+  // MQTT
+  message Mqtt {
+    string addr = 1;  // 对端网络地址
+  }
+
+  // Kafka
+  message Kafka {
+    repeated string addrs = 1;  // 对端网络地址
+  }
+
+  // RabbitMQ
+  message RabbitMQ {
+    repeated string addrs = 1;  // 对端网络地址
+  }
+
+  // SSE
+  message SSE {
+    string network = 1; // 网络
+    string addr = 2;  // 服务监听地址
+    google.protobuf.Duration timeout = 3; // 超时时间
+    string path = 4;  // 路径
+    string codec = 5;  // 编解码器
+  }
+
+  REST rest = 1;  // REST服务
+  GRPC grpc = 2;  // gRPC服务
+  Websocket websocket = 3;  // Websocket服务
+  Mqtt mqtt = 4;  // MQTT服务
+  Kafka kafka = 5;  // Kafka服务
+  RabbitMQ rabbitmq = 6;  // RabbitMQ服务
+  SSE sse = 7;  // SSE服务
+}
